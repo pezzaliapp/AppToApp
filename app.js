@@ -16,6 +16,7 @@ import { salvaApp, elencoApp, eliminaApp, svuotaCronologia } from './lib/storage
 const FAQ = [
   { d: 'Quale provider conviene per iniziare?', r: 'Groq, gratis e velocissimo. Crea una chiave su console.groq.com/keys (no carta richiesta).' },
   { d: 'Quanto mi costa usare AppToApp?', r: 'Zero. Sempre. La chiave API che usi è gratuita dai provider supportati.' },
+  { d: 'Gli esempi mostrati funzionano sempre?', r: 'Sì. Mostriamo solo esempi che producono app funzionanti con i modelli AI gratuiti supportati. Se aggiungiamo nuovi esempi più ambiziosi in futuro, saranno chiaramente marcati come "sperimentali" per gestire le aspettative.' },
   { d: 'Posso vendere le app che genero?', r: 'Sì, sono completamente tue. Licenza MIT su tutto il codice generato.' },
   { d: 'Le app funzionano offline?', r: 'Sì. Dopo aver esportato lo zip, l\'app gira aprendo index.html senza internet.' },
   { d: 'Cosa succede se l\'output ha bug?', r: 'Premi Rigenera, oppure scrivi un prompt più dettagliato. Vedi i suggerimenti in fondo.' },

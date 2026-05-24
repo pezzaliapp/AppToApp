@@ -62,9 +62,9 @@ L'anteprima live nel riquadro sinistro è interattiva. Clicca, digita, prova.
    `https://tuonome.github.io/mia-app/`
 7. Condividi il link con chiunque. Gratis, senza scadenza.
 
-## 💡 30 prompt di esempio testati
+## 💡 24 prompt di esempio testati
 
-Vedi il file [docs/ESEMPI.md](docs/ESEMPI.md) per 30 prompt pronti, 
+Vedi il file [docs/ESEMPI.md](docs/ESEMPI.md) per 24 prompt pronti, 
 divisi per categoria, che producono app funzionanti.
 
 I migliori per iniziare:
@@ -72,7 +72,7 @@ I migliori per iniziare:
 - ⏱️ **Timer Pomodoro** — cicli lavoro/pausa con suono
 - 🎮 **Tennis Pong** — gioco classico canvas
 - 🏪 **Preventivo officina** — manodopera + ricambi + IVA
-- 📊 **Habit tracker** — abitudini giornaliere con streak
+- 📊 **Pomodoro tasks** — task di oggi con cicli Pomodoro
 - 🍴 **Lista spesa intelligente** — con categorie e WhatsApp export
 
 ## 🛡️ Privacy e sicurezza

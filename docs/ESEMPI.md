@@ -1,24 +1,25 @@
-# 💡 30 prompt di esempio testati
+# 💡 24 prompt di esempio testati
 
 Tutti i prompt qui sotto sono testati con Groq (Llama 3.3 70B) e funzionano.
-Per usarli: vai su AppToApp, lascia selezionato "AI libera" (o usa il
-template più adatto), copia il prompt, premi "Genera app".
+Mostriamo SOLO esempi che producono app funzionanti con i modelli AI gratuiti
+supportati. Per usarli: vai su AppToApp, lascia selezionato "AI libera" (o usa
+il template più adatto), copia il prompt, premi "Genera app".
 
 ## 🗂️ Categorie
 
 - **🎮 Giochi e simulatori** — esempi 1-5
 - **🧮 Calcolatori utili** — esempi 6-10
-- **⏱️ Timer e contatori** — esempi 11-14
-- **🏪 Per artigiani e PMI** — esempi 15-19
-- **🍴 Cucina e casa** — esempi 20-23
-- **📊 Produttività e pratiche** — esempi 24-27
-- **🎨 Gadget creativi** — esempi 28-30
+- **⏱️ Timer e contatori** — esempi 11-13
+- **🏪 Per artigiani e PMI** — esempi 14-17
+- **🍴 Cucina e casa** — esempi 18-21
+- **📊 Produttività e pratiche** — esempi 22-23
+- **🎨 Gadget creativi** — esempio 24
 
-_30 esempi in 7 categorie; conteggi invariati dopo l'audit di accessibilità._
+_24 esempi in 7 categorie._
 
 ## 📐 Regole grafiche applicate a tutti gli esempi
 
-Tutti i 30 prompt qui sotto includono automaticamente queste regole in coda.
+Tutti i 24 prompt qui sotto includono automaticamente queste regole in coda.
 Non devi copiarle, sono già nel testo che incolli in AppToApp.
 
 ```
@@ -363,39 +364,7 @@ REGOLE GRAFICHE OBBLIGATORIE:
 - Hover leggeri (filter: brightness(1.1)).
 ```
 
-### 13. Timer HIIT allenamento
-
-```
-Timer interval training HIIT. Configurabili:
-
-Durata fase lavoro (default 30 secondi)
-Durata fase pausa (default 10 secondi)
-Numero round (default 10)
-La fase corrente NON colora tutto lo schermo: mostrala in un pannello
-centrale su sfondo dark mode standard, con un bordo colorato spesso e
-un'icona che identifica la fase:
-- Fase lavoro: bordo rosso e icona 🔥
-- Fase pausa: bordo verde e icona 🧘
-Il timer (mm:ss) è SEMPRE su sfondo dark mode con testo chiaro, grande e
-leggibile. Mostra round corrente / round totali.
-Beep diversi per inizio/fine fase con Web Audio API.
-Pulsanti grandi mobile-friendly (Start, Pausa, Reset). Dark mode fitness.
-
-REGOLE GRAFICHE OBBLIGATORIE:
-- Sfondo principale dark mode #0f1419 (o simile).
-- Testo principale chiaro #e8eaed (o simile).
-- Contrasto minimo WCAG AA: il testo deve essere SEMPRE leggibile sullo sfondo.
-- VIETATO testo bianco su sfondo giallo.
-- VIETATO testo chiaro su sfondo chiaro.
-- Card/note colorate: usa sfondo con colore TENUE (lightness 25-35%) e testo bianco, OPPURE sfondo brillante con testo nero/scuro.
-- Font minimo: 16px per il body, 18px per i titoli.
-- Pulsanti: padding 12px 20px, font 16px, altezza minima 44px.
-- Spaziatura: padding 20px tra le sezioni, gap 12px tra gli elementi.
-- Bordi arrotondati 8-12px su card e pulsanti.
-- Hover leggeri (filter: brightness(1.1)).
-```
-
-### 14. Sveglia personalizzata
+### 13. Sveglia personalizzata
 
 ```
 Sveglia che suona a un'ora impostata. Input ora hh:mm.
@@ -422,7 +391,7 @@ REGOLE GRAFICHE OBBLIGATORIE:
 
 ## 🏪 Per artigiani e PMI
 
-### 15. Preventivo officina semplice
+### 14. Preventivo officina semplice
 
 ```
 Calcolatore preventivo officina meccanica. Dark mode con l'arancione usato
@@ -454,37 +423,7 @@ REGOLE GRAFICHE OBBLIGATORIE:
 - Hover leggeri (filter: brightness(1.1)).
 ```
 
-### 16. Checklist tagliando auto
-
-```
-Checklist tagliando auto per officina. Voci da controllare:
-olio motore, filtro olio, filtro aria, filtro abitacolo, candele,
-pastiglie freni anteriori, pastiglie freni posteriori, liquido freni,
-batteria, pressione gomme, profondità battistrada, luci, tergicristalli,
-liquido refrigerante.
-Ogni voce ha 3 stati selezionabili, ciascuno con sfondo pieno e testo bianco
-(MAI giallo come sfondo):
-- OK: sfondo verde scuro #1b5e20, testo bianco, icona ✅
-- Da sostituire: sfondo arancione scuro #e65100, testo bianco, icona ⚠️
-- Sostituito: sfondo verde acceso #2e7d32, testo bianco, icona ✓
-Campo note (textarea) per ogni voce. Salvataggio in localStorage.
-Pulsante stampa per la consegna al cliente. Dark mode officina.
-
-REGOLE GRAFICHE OBBLIGATORIE:
-- Sfondo principale dark mode #0f1419 (o simile).
-- Testo principale chiaro #e8eaed (o simile).
-- Contrasto minimo WCAG AA: il testo deve essere SEMPRE leggibile sullo sfondo.
-- VIETATO testo bianco su sfondo giallo.
-- VIETATO testo chiaro su sfondo chiaro.
-- Card/note colorate: usa sfondo con colore TENUE (lightness 25-35%) e testo bianco, OPPURE sfondo brillante con testo nero/scuro.
-- Font minimo: 16px per il body, 18px per i titoli.
-- Pulsanti: padding 12px 20px, font 16px, altezza minima 44px.
-- Spaziatura: padding 20px tra le sezioni, gap 12px tra gli elementi.
-- Bordi arrotondati 8-12px su card e pulsanti.
-- Hover leggeri (filter: brightness(1.1)).
-```
-
-### 17. Registro presenze cantiere
+### 15. Registro presenze cantiere
 
 ```
 Registro presenze cantiere edile.
@@ -509,7 +448,7 @@ REGOLE GRAFICHE OBBLIGATORIE:
 - Hover leggeri (filter: brightness(1.1)).
 ```
 
-### 18. Listino prezzi consultabile
+### 16. Listino prezzi consultabile
 
 ```
 Listino prezzi dinamico per piccola attività. Aggiungi voci con:
@@ -533,7 +472,7 @@ REGOLE GRAFICHE OBBLIGATORIE:
 - Hover leggeri (filter: brightness(1.1)).
 ```
 
-### 19. Calcolatore margine
+### 17. Calcolatore margine
 
 ```
 Calcolatore margine commerciale. Input:
@@ -567,7 +506,7 @@ REGOLE GRAFICHE OBBLIGATORIE:
 
 ## 🍴 Cucina e casa
 
-### 20. Lista spesa con categorie
+### 18. Lista spesa con categorie
 
 ```
 Lista della spesa intelligente con categorie:
@@ -591,7 +530,7 @@ REGOLE GRAFICHE OBBLIGATORIE:
 - Hover leggeri (filter: brightness(1.1)).
 ```
 
-### 21. Ricettario personale
+### 19. Ricettario personale
 
 ```
 Ricettario digitale personale. Aggiungi ricetta con:
@@ -616,7 +555,7 @@ REGOLE GRAFICHE OBBLIGATORIE:
 - Hover leggeri (filter: brightness(1.1)).
 ```
 
-### 22. Cantina vini
+### 20. Cantina vini
 
 ```
 Inventario vini personale. Aggiungi vino con:
@@ -640,7 +579,7 @@ REGOLE GRAFICHE OBBLIGATORIE:
 - Hover leggeri (filter: brightness(1.1)).
 ```
 
-### 23. Calcolatore ricette (scaling)
+### 21. Calcolatore ricette (scaling)
 
 ```
 Calcolatore per scalare le porzioni di una ricetta.
@@ -668,42 +607,7 @@ REGOLE GRAFICHE OBBLIGATORIE:
 
 ## 📊 Produttività e pratiche
 
-### 24. Habit tracker mensile
-
-```
-Tracker di abitudini mensile multi-abitudine.
-REGOLA FONDAMENTALE: ogni abitudine ha un NOME, mostrato come titolo sopra
-la SUA griglia mensile dei giorni. Niente griglie anonime.
-L'utente può aggiungere più abitudini (es: meditazione, sport, lettura,
-no alcol), ognuna con la propria griglia e il proprio nome ben visibile.
-Per ogni abitudine, una griglia con tutti i giorni del mese: si clicca un
-giorno per segnarlo come completato.
-Stati delle celle:
-- Giorno futuro: sfondo #2a2d3a (grigio scuro neutro), testo grigio chiaro
-- Oggi: bordo viola #7c3aed, sfondo trasparente
-- Completata: sfondo verde #2e7d32, testo bianco
-- Mancata (giorno passato non completato): sfondo trasparente, testo rosso tenue
-DEFAULT iniziale di ogni cella: stato futuro/grigio, MAI rosso.
-Per ogni abitudine mostra: completamento del mese in %, streak attuale
-(giorni consecutivi) e streak record.
-Salvataggio in localStorage. Possibilità di eliminare un'abitudine.
-Dark mode minimal.
-
-REGOLE GRAFICHE OBBLIGATORIE:
-- Sfondo principale dark mode #0f1419 (o simile).
-- Testo principale chiaro #e8eaed (o simile).
-- Contrasto minimo WCAG AA: il testo deve essere SEMPRE leggibile sullo sfondo.
-- VIETATO testo bianco su sfondo giallo.
-- VIETATO testo chiaro su sfondo chiaro.
-- Card/note colorate: usa sfondo con colore TENUE (lightness 25-35%) e testo bianco, OPPURE sfondo brillante con testo nero/scuro.
-- Font minimo: 16px per il body, 18px per i titoli.
-- Pulsanti: padding 12px 20px, font 16px, altezza minima 44px.
-- Spaziatura: padding 20px tra le sezioni, gap 12px tra gli elementi.
-- Bordi arrotondati 8-12px su card e pulsanti.
-- Hover leggeri (filter: brightness(1.1)).
-```
-
-### 25. Diario rapido
+### 22. Diario rapido
 
 ```
 Diario personale veloce. Textarea per scrivere pensiero del momento.
@@ -728,40 +632,7 @@ REGOLE GRAFICHE OBBLIGATORIE:
 - Hover leggeri (filter: brightness(1.1)).
 ```
 
-### 26. Scadenzario
-
-```
-Scadenzario: lista di promemoria con scadenze. Per ogni voce:
-titolo, data scadenza, priorità (alta/media/bassa), categoria, note.
-NON usare note adesive colorate. Mostra ogni promemoria come una SCHEDA con
-sfondo dark mode #1a1d2e e testo bianco, con a SINISTRA una barra verticale
-spessa 6px che indica la priorità:
-- Alta: rosso #d32f2f
-- Media: arancione #f57c00
-- Bassa: blu #1976d2
-Lo stato della scadenza è un BADGE in alto a destra della scheda:
-- Scaduto: badge rosso scuro, testo bianco
-- Entro 7 giorni: badge arancione scuro, testo bianco
-- Futuro: badge grigio scuro, testo chiaro
-Schede ordinate per data. Notifica visiva all'apertura se ci sono scadenze
-imminenti. Filtro per categoria. CRUD completo (aggiungi/modifica/elimina)
-con salvataggio in localStorage. Dark mode.
-
-REGOLE GRAFICHE OBBLIGATORIE:
-- Sfondo principale dark mode #0f1419 (o simile).
-- Testo principale chiaro #e8eaed (o simile).
-- Contrasto minimo WCAG AA: il testo deve essere SEMPRE leggibile sullo sfondo.
-- VIETATO testo bianco su sfondo giallo.
-- VIETATO testo chiaro su sfondo chiaro.
-- Card/note colorate: usa sfondo con colore TENUE (lightness 25-35%) e testo bianco, OPPURE sfondo brillante con testo nero/scuro.
-- Font minimo: 16px per il body, 18px per i titoli.
-- Pulsanti: padding 12px 20px, font 16px, altezza minima 44px.
-- Spaziatura: padding 20px tra le sezioni, gap 12px tra gli elementi.
-- Bordi arrotondati 8-12px su card e pulsanti.
-- Hover leggeri (filter: brightness(1.1)).
-```
-
-### 27. Pomodoro tasks
+### 23. Pomodoro tasks
 
 ```
 Combinazione Pomodoro + task list. Aggiungi task da fare oggi.
@@ -788,38 +659,7 @@ REGOLE GRAFICHE OBBLIGATORIE:
 
 ## 🎨 Gadget creativi
 
-### 28. Generatore palette colori
-
-```
-Generatore di palette di colori armonici.
-Pulsante "Genera nuova palette" mostra 5 colori coordinati random (metodo
-HSL con shift uniforme di tonalità).
-VINCOLO ASSOLUTO: il codice HEX/RGB NON va MAI stampato SOPRA il campione di
-colore. Ogni colore si presenta così:
-- in alto, il campione di colore puro (height 80px)
-- sotto, una piccola etichetta su sfondo dark mode con testo chiaro che mostra
-  il codice HEX (es. #4f46e5) e, sotto, "RGB 79,70,229"
-Così il codice resta leggibile qualunque sia il colore del campione.
-Click sul campione: copia il codice negli appunti (con conferma visiva).
-Pulsante "Esporta CSS variables" che genera
-:root { --colore-1: #...; --colore-2: #...; }
-Salva fino a 10 palette preferite in localStorage. Dark mode design.
-
-REGOLE GRAFICHE OBBLIGATORIE:
-- Sfondo principale dark mode #0f1419 (o simile).
-- Testo principale chiaro #e8eaed (o simile).
-- Contrasto minimo WCAG AA: il testo deve essere SEMPRE leggibile sullo sfondo.
-- VIETATO testo bianco su sfondo giallo.
-- VIETATO testo chiaro su sfondo chiaro.
-- Card/note colorate: usa sfondo con colore TENUE (lightness 25-35%) e testo bianco, OPPURE sfondo brillante con testo nero/scuro.
-- Font minimo: 16px per il body, 18px per i titoli.
-- Pulsanti: padding 12px 20px, font 16px, altezza minima 44px.
-- Spaziatura: padding 20px tra le sezioni, gap 12px tra gli elementi.
-- Bordi arrotondati 8-12px su card e pulsanti.
-- Hover leggeri (filter: brightness(1.1)).
-```
-
-### 29. Generatore password sicure
+### 24. Generatore password sicure
 
 ```
 Generatore password configurabile.
@@ -830,33 +670,6 @@ Pulsante "Copia" copia negli appunti.
 Indicatore forza (debole/media/forte/fortissima) con barra colorata.
 Storia ultime 5 password generate (solo in memoria, non salvate).
 Dark mode security.
-
-REGOLE GRAFICHE OBBLIGATORIE:
-- Sfondo principale dark mode #0f1419 (o simile).
-- Testo principale chiaro #e8eaed (o simile).
-- Contrasto minimo WCAG AA: il testo deve essere SEMPRE leggibile sullo sfondo.
-- VIETATO testo bianco su sfondo giallo.
-- VIETATO testo chiaro su sfondo chiaro.
-- Card/note colorate: usa sfondo con colore TENUE (lightness 25-35%) e testo bianco, OPPURE sfondo brillante con testo nero/scuro.
-- Font minimo: 16px per il body, 18px per i titoli.
-- Pulsanti: padding 12px 20px, font 16px, altezza minima 44px.
-- Spaziatura: padding 20px tra le sezioni, gap 12px tra gli elementi.
-- Bordi arrotondati 8-12px su card e pulsanti.
-- Hover leggeri (filter: brightness(1.1)).
-```
-
-### 30. Lavagna note adesive (kanban)
-
-```
-Lavagna kanban con 3 colonne: Da fare, In corso, Fatte.
-Le note sono card con sfondo SATURO e testo bianco (niente pastelli, niente
-sfondi chiari):
-- Note "Da fare": sfondo #424242 (grigio scuro), testo bianco
-- Note "In corso": sfondo #1565c0 (blu scuro), testo bianco
-- Note "Fatte": sfondo #2e7d32 (verde scuro), testo bianco e barrato
-Click su una nota per spostarla nella colonna successiva.
-Drag visivo opzionale tra colonne. Doppio click per modificare il testo.
-Cestino per eliminare. Salvataggio in localStorage. Dark mode bacheca legno.
 
 REGOLE GRAFICHE OBBLIGATORIE:
 - Sfondo principale dark mode #0f1419 (o simile).

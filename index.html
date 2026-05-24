@@ -253,7 +253,7 @@
     <!-- ====================== SCHERMATA: ESEMPI ====================== -->
     <section x-show="schermata==='esempi'">
       <h1 class="titolo-grande">Esempi e <span class="evidenza">come si usa</span></h1>
-      <p class="sottotitolo">Parti da uno dei 30 prompt testati, oppure scopri come provare, esportare e pubblicare le tue app.</p>
+      <p class="sottotitolo">Parti da uno dei 24 prompt testati, oppure scopri come provare, esportare e pubblicare le tue app.</p>
 
       <!-- a) Come usare AppToApp -->
       <h2 class="sezione-titolo spazia">Come usare AppToApp</h2>
@@ -304,8 +304,8 @@
 
       </div>
 
-      <!-- b) 30 esempi pronti -->
-      <h2 class="sezione-titolo spazia">30 esempi pronti</h2>
+      <!-- b) 24 esempi pronti -->
+      <h2 class="sezione-titolo spazia">24 esempi pronti</h2>
       <div class="filtri-categoria" role="tablist" aria-label="Filtra per categoria">
         <template x-for="c in categorieEsempi" :key="c.id">
           <button type="button" :class="{ attivo: categoriaEsempi===c.id }" @click="filtraEsempi(c.id)"
@@ -326,6 +326,11 @@
             <button class="btn btn-primario" @click="usaPrompt(es.prompt)">✨ Usa questo prompt</button>
           </article>
         </template>
+      </div>
+      <!-- Stato vuoto: mostrato se una categoria non ha (ancora) esempi -->
+      <div class="vuoto" x-show="esempiFiltrati().length === 0">
+        <div class="emoji" aria-hidden="true">✨</div>
+        <p>Nessun esempio in questa categoria al momento. Ne aggiungeremo altri presto!</p>
       </div>
 
       <!-- c) FAQ -->
