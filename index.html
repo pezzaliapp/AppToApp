@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="AppToApp: descrivi un'app e ottienila pronta, elegante e installabile. A costo zero, tutto nel browser.">
+  <meta name="theme-color" content="#7c5cff">
+  <meta name="color-scheme" content="dark">
+  <title>AppToApp · genera web app dal testo</title>
+
+  <!-- Favicon SVG inline (logo A→A) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237c5cff'/%3E%3Ctext x='32' y='43' font-size='26' font-family='system-ui,sans-serif' font-weight='800' fill='white' text-anchor='middle'%3EA%E2%86%92A%3C/text%3E%3C/svg%3E">
+
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- highlight.js: tema scuro + libreria (da CDN) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/github-dark.min.css">
+  <script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+
+  <!-- Logica dell'app (modulo ES). Carica Alpine.js da solo, in ordine sicuro. -->
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+<div class="app" x-data="appToApp" x-cloak>
+
+  <!-- ====================== TESTATA ====================== -->
+  <header class="testata">
+    <div class="marchio">
+      <span class="logo">A→A</span>
+      <span>AppToApp</span>
+      <span class="gratis">€ 0</span>
+    </div>
+    <nav class="nav" aria-label="Navigazione principale">
+      <button :class="{ attivo: schermata==='genera' }" @click="vai('genera')"
+              :aria-current="schermata==='genera' ? 'page' : false">
+        <span aria-hidden="true">✨</span> Genera
+      </button>
+      <button :class="{ attivo: schermata==='cronologia' }" @click="vai('cronologia')"
+              :aria-current="schermata==='cronologia' ? 'page' : false">
+        <span aria-hidden="true">🕘</span> Cronologia
+      </button>
+      <button :class="{ attivo: schermata==='impostazioni' }" @click="vai('impostazioni')"
+              :aria-current="schermata==='impostazioni' ? 'page' : false">
+        <span aria-hidden="true">⚙️</span> Impostazioni
+      </button>
+    </nav>
+  </header>
+
+  <main class="contenuto">
+
+    <!-- ====================== SCHERMATA: GENERA ====================== -->
+    <section x-show="schermata==='genera'">
+      <h1 class="titolo-grande">Trasforma una frase in <span class="evidenza">un'app vera</span>.</h1>
+      <p class="sottotitolo">Descrivi l'app che vuoi: AppToApp la genera completa, elegante e pronta da scaricare. Senza costi, senza backend.</p>
+
+      <!-- Avviso chiave mancante -->
+      <div class="avviso avviso-info spazia" x-show="!config.chiave">
+        <span class="icona" aria-hidden="true">🔑</span>
+        <div>
+          Per generare serve una chiave API gratuita.
+          <a href="#" @click.prevent="apriOnboarding()">Scopri come ottenerla in 3 click →</a>
+        </div>
+      </div>
+
+      <div class="card spazia">
+        <label class="etichetta" for="prompt">Descrivi l'app che vuoi creare</label>
+        <textarea id="prompt" class="prompt-grande" x-model="prompt"
+          placeholder="Es: una calcolatrice per percentuali e sconti, con tema scuro e tasti grandi"></textarea>
+
+        <div class="spazia-sm">
+          <span class="etichetta">Parti da un template (opzionale)</span>
+          <div class="griglia-template">
+            <template x-for="t in templates" :key="t.id">
+              <button type="button" class="template" :class="{ attivo: templateSelezionato===t.id }"
+                      @click="templateSelezionato=t.id" :aria-pressed="templateSelezionato===t.id">
+                <span class="icona" aria-hidden="true" x-text="t.icona"></span>
+                <span class="nome" x-text="t.nome"></span>
+                <span class="descr" x-text="t.descrizione"></span>
+              </button>
+            </template>
+          </div>
+        </div>
+
+        <div class="riga spazia">
+          <button class="btn btn-primario btn-grande" @click="genera()" :disabled="inGenerazione || !prompt.trim()">
+            <template x-if="inGenerazione"><span class="spinner" aria-hidden="true"></span></template>
+            <span x-text="inGenerazione ? 'Sto generando…' : '✨ Genera app'"></span>
+          </button>
+          <span class="testo-debole">Esempi:</span>
+          <template x-for="es in esempi" :key="es">
+            <button class="btn btn-ghost btn-piccolo" @click="prompt=es" x-text="es"></button>
+          </template>
+        </div>
+      </div>
+
+      <!-- Errore -->
+      <div class="avviso avviso-errore spazia" x-show="errore" x-text="errore" role="alert"></div>
+
+      <!-- Caricamento -->
+      <div class="caricamento-box" x-show="inGenerazione">
+        <span class="spinner" aria-hidden="true"></span>
+        <div>Sto costruendo la tua app…<br><span class="testo-debole">Di solito bastano pochi secondi.</span></div>
+      </div>
+
+      <!-- Workspace: anteprima + editor -->
+      <template x-if="appCorrente && !inGenerazione">
+        <div>
+          <div class="riga spazia" style="justify-content:space-between;align-items:flex-end">
+            <div>
+              <h2 class="sezione-titolo" x-text="appCorrente.nome"></h2>
+              <p class="testo-soft" x-text="appCorrente.descrizione"></p>
+            </div>
+            <div class="riga">
+              <button class="btn" @click="rigenera()" :disabled="inGenerazione" title="Genera di nuovo con lo stesso prompt">🔄 Rigenera</button>
+              <button class="btn" @click="esporta()" title="Scarica come .zip">📦 Esporta .zip</button>
+              <button class="btn btn-primario" @click="apriGuidaPages()">🚀 Pubblica</button>
+            </div>
+          </div>
+
+          <div class="workspace">
+            <!-- Anteprima -->
+            <div class="riquadro">
+              <div class="riquadro-barra">
+                <span class="titolino"><span aria-hidden="true">👀</span> Anteprima live</span>
+                <span class="chip spazio">sandbox</span>
+              </div>
+              <iframe class="anteprima-frame" :srcdoc="srcAnteprima"
+                      sandbox="allow-scripts" title="Anteprima dell'app generata"
+                      loading="lazy" referrerpolicy="no-referrer"></iframe>
+            </div>
+
+            <!-- Editor -->
+            <div class="riquadro">
+              <div class="riquadro-barra">
+                <div class="tab-editor" role="tablist" aria-label="File dell'app">
+                  <button :class="{ attivo: tabEditor==='html' }" @click="tabEditor='html'" role="tab" :aria-selected="tabEditor==='html'">index.html</button>
+                  <button :class="{ attivo: tabEditor==='css' }" @click="tabEditor='css'" role="tab" :aria-selected="tabEditor==='css'">styles.css</button>
+                  <button :class="{ attivo: tabEditor==='js' }" @click="tabEditor='js'" role="tab" :aria-selected="tabEditor==='js'">app.js</button>
+                </div>
+                <button class="btn btn-piccolo btn-ghost spazio" @click="modificaCodice=!modificaCodice"
+                        x-text="modificaCodice ? '👁 Anteprima codice' : '✏️ Modifica'"></button>
+              </div>
+
+              <!-- Modalità modifica: textarea editabile -->
+              <div class="editor-area" x-show="modificaCodice">
+                <textarea x-model="appCorrente[tabEditor]" @input.debounce.500ms="aggiornaAnteprima()"
+                          spellcheck="false" aria-label="Editor del codice"></textarea>
+              </div>
+              <!-- Modalità lettura: codice evidenziato -->
+              <pre class="editor-codice" x-show="!modificaCodice"><code x-html="codiceEvidenziato()"></code></pre>
+            </div>
+          </div>
+
+          <div class="avviso avviso-privacy spazia-sm">
+            <span class="icona" aria-hidden="true">🔒</span>
+            <div>La tua chiave API resta nel tuo browser, non viene mai inviata a server di AppToApp.</div>
+          </div>
+        </div>
+      </template>
+    </section>
+
+    <!-- ====================== SCHERMATA: CRONOLOGIA ====================== -->
+    <section x-show="schermata==='cronologia'">
+      <div class="riga" style="justify-content:space-between">
+        <h1 class="titolo-grande">Cronologia</h1>
+        <button class="btn btn-piccolo btn-pericolo" x-show="cronologia.length" @click="svuotaTutto()">🗑 Svuota tutto</button>
+      </div>
+      <p class="sottotitolo">Le app che generi restano salvate qui, sul tuo dispositivo (IndexedDB).</p>
+
+      <div class="vuoto" x-show="!cronologia.length">
+        <div class="emoji" aria-hidden="true">🗂️</div>
+        <p>Nessuna app ancora. Vai su <a href="#" @click.prevent="vai('genera')">Genera</a> e creane una!</p>
+      </div>
+
+      <div class="lista-cronologia spazia" x-show="cronologia.length">
+        <template x-for="voce in cronologia" :key="voce.id">
+          <article class="voce-cronologia">
+            <span class="nome" x-text="voce.nome"></span>
+            <span class="descr" x-text="voce.descrizione"></span>
+            <span class="data" x-text="formattaData(voce.creata)"></span>
+            <div class="azioni">
+              <button class="btn btn-piccolo" @click="apriDaCronologia(voce)">Apri</button>
+              <button class="btn btn-piccolo btn-pericolo" @click="eliminaVoce(voce.id)" :aria-label="'Elimina ' + voce.nome">Elimina</button>
+            </div>
+          </article>
+        </template>
+      </div>
+    </section>
+
+    <!-- ====================== SCHERMATA: IMPOSTAZIONI ====================== -->
+    <section x-show="schermata==='impostazioni'">
+      <h1 class="titolo-grande">Impostazioni</h1>
+      <p class="sottotitolo">Scegli il provider gratuito e incolla la tua chiave. Tutto resta nel tuo browser.</p>
+
+      <div class="avviso avviso-privacy spazia">
+        <span class="icona" aria-hidden="true">🔒</span>
+        <div>La tua chiave API resta nel tuo browser (<code>localStorage</code>), non viene mai inviata a server di AppToApp, mai inserita in URL, mai nel repository.</div>
+      </div>
+
+      <div class="card spazia">
+        <div class="campo">
+          <span class="etichetta">Provider</span>
+          <div class="griglia-provider">
+            <template x-for="key in providerKeys" :key="key">
+              <label class="provider-radio" :class="{ attivo: config.provider===key }">
+                <input type="radio" name="provider" :value="key" x-model="config.provider" @change="cambiaProvider(key)">
+                <span>
+                  <span class="p-nome" x-text="PROVIDER[key].nome"></span><br>
+                  <span class="p-desc" x-text="PROVIDER[key].descrizione"></span>
+                </span>
+              </label>
+            </template>
+          </div>
+        </div>
+
+        <div class="campo">
+          <label class="etichetta" for="chiave">Chiave API</label>
+          <input type="password" id="chiave" x-model="config.chiave" placeholder="Incolla qui la tua chiave" autocomplete="off">
+          <p class="aiuto">
+            Ottieni una chiave gratuita →
+            <a :href="PROVIDER[config.provider].linkChiave" target="_blank" rel="noopener" x-text="PROVIDER[config.provider].linkChiave"></a>
+          </p>
+        </div>
+
+        <div class="campo">
+          <label class="etichetta" for="modello">Modello</label>
+          <select id="modello" x-model="config.modello">
+            <template x-for="m in PROVIDER[config.provider].modelli" :key="m">
+              <option :value="m" x-text="m"></option>
+            </template>
+          </select>
+        </div>
+
+        <div class="campo">
+          <label class="etichetta" for="temp">Temperatura: <span x-text="Number(config.temperatura).toFixed(1)"></span></label>
+          <input type="range" id="temp" min="0" max="1" step="0.1" x-model.number="config.temperatura">
+          <p class="aiuto">Più bassa = risposte precise e ripetibili. Più alta = più creatività.</p>
+        </div>
+
+        <div class="riga riga-fine">
+          <span class="avviso avviso-ok btn-piccolo" x-show="configSalvata" x-transition>✓ Salvato</span>
+          <button class="btn btn-primario" @click="salvaImpostazioni()">💾 Salva impostazioni</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="pie">
+    AppToApp · open source <a href="LICENSE">MIT</a> · © 2026 pezzaliAPP / Alessandro Pezzali ·
+    <a href="https://github.com/pezzaliapp/AppToApp" target="_blank" rel="noopener">GitHub</a>
+  </footer>
+
+  <!-- ====================== MODALE: ONBOARDING ====================== -->
+  <template x-if="onboardingVisibile">
+    <div class="overlay" @click.self="chiudiOnboarding()">
+      <div class="modale" role="dialog" aria-modal="true" aria-labelledby="ob-titolo">
+        <h2 id="ob-titolo">Benvenuto in AppToApp 👋</h2>
+        <p class="testo-soft">Per generare app ti serve una chiave API <strong>gratuita</strong>. La più semplice è Google Gemini: nessuna carta di credito, 1.500 richieste al giorno.</p>
+        <div class="passi">
+          <div class="passo"><span class="num">1</span><span class="testo">Apri <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener"><strong>aistudio.google.com/apikey</strong></a> e accedi con Google.</span></div>
+          <div class="passo"><span class="num">2</span><span class="testo">Premi <strong>"Create API key"</strong> e copia la chiave.</span></div>
+          <div class="passo"><span class="num">3</span><span class="testo">Incollala qui sotto e premi <strong>Salva</strong>.</span></div>
+        </div>
+        <div class="campo">
+          <label class="etichetta" for="ob-chiave">La tua chiave Gemini</label>
+          <input type="password" id="ob-chiave" x-model="config.chiave" placeholder="Incolla qui la chiave" autocomplete="off">
+        </div>
+        <div class="avviso avviso-privacy spazia-sm">
+          <span class="icona" aria-hidden="true">🔒</span>
+          <div>Resta solo nel tuo browser. Non la vediamo mai.</div>
+        </div>
+        <div class="riga riga-fine spazia">
+          <button class="btn btn-ghost" @click="chiudiOnboarding()">Più tardi</button>
+          <button class="btn btn-primario" @click="salvaImpostazioni(); chiudiOnboarding()" :disabled="!config.chiave.trim()">💾 Salva e inizia</button>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <!-- ====================== MODALE: GUIDA GITHUB PAGES ====================== -->
+  <template x-if="guidaPagesVisibile">
+    <div class="overlay" @click.self="guidaPagesVisibile=false">
+      <div class="modale" role="dialog" aria-modal="true" aria-labelledby="gp-titolo">
+        <h2 id="gp-titolo">🚀 Pubblica su GitHub Pages (gratis)</h2>
+        <p class="testo-soft">L'app si pubblica online senza costi in pochi passi:</p>
+        <div class="passi">
+          <div class="passo"><span class="num">1</span><span class="testo">Premi <strong>📦 Esporta .zip</strong> e scompatta l'archivio.</span></div>
+          <div class="passo"><span class="num">2</span><span class="testo">Crea un repository su <a href="https://github.com/new" target="_blank" rel="noopener">GitHub</a> e carica i file (anche via drag &amp; drop).</span></div>
+          <div class="passo"><span class="num">3</span><span class="testo">Vai in <strong>Settings → Pages</strong>, scegli branch <strong>main</strong> e cartella <strong>/(root)</strong>, poi <strong>Save</strong>.</span></div>
+          <div class="passo"><span class="num">4</span><span class="testo">Dopo qualche minuto l'app sarà online su <code>https://&lt;utente&gt;.github.io/&lt;repo&gt;/</code></span></div>
+        </div>
+        <div class="riga riga-fine">
+          <button class="btn btn-ghost" @click="guidaPagesVisibile=false">Chiudi</button>
+          <button class="btn btn-primario" @click="esporta(); guidaPagesVisibile=false">📦 Esporta ora</button>
+        </div>
+      </div>
+    </div>
+  </template>
+
+</div>
+</body>
+</html>
