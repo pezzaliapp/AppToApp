@@ -1,9 +1,12 @@
 # 💡 24 prompt di esempio testati
 
-Tutti i prompt qui sotto sono testati con Groq (Llama 3.3 70B) e funzionano.
-Mostriamo SOLO esempi che producono app funzionanti con i modelli AI gratuiti
-supportati. Per usarli: vai su AppToApp, lascia selezionato "AI libera" (o usa
-il template più adatto), copia il prompt, premi "Genera app".
+Tutti i prompt qui sotto sono testati con i modelli AI gratuiti supportati.
+Per usarli: vai su AppToApp, lascia selezionato "AI libera" (o usa il template
+più adatto), copia il prompt, premi "Genera app".
+
+> ⚠️ I modelli AI generativi non sono deterministici: lo stesso prompt può dare
+> risultati diversi. Se un'app non esce completa, premi 🔄 Rigenera o cambia
+> modello (Groq è in genere il più affidabile per il JSON).
 
 ## 🗂️ Categorie
 
@@ -17,10 +20,19 @@ il template più adatto), copia il prompt, premi "Genera app".
 
 _24 esempi in 7 categorie._
 
-## 📐 Regole grafiche applicate a tutti gli esempi
+## 📐 Regole applicate a tutti gli esempi
 
-Tutti i 24 prompt qui sotto includono automaticamente queste regole in coda.
-Non devi copiarle, sono già nel testo che incolli in AppToApp.
+Tutti i 24 prompt qui sotto includono automaticamente, in coda, questi due
+blocchi standard. Non devi copiarli: sono già nel testo che incolli in AppToApp.
+
+```
+REGOLE FUNZIONALI OBBLIGATORIE:
+- Ogni sezione dell'app deve avere un TITOLO o ETICHETTA visibile che spiega cosa fa
+- Ogni input deve avere un <label> sopra che descrive cosa inserire
+- Ogni pulsante di azione deve avere un event listener esplicito in JavaScript che produce un risultato visibile
+- Ogni output (risultato di calcolo, lista, valore generato) deve essere in un elemento HTML con etichetta visibile (es: 'Risultato:', 'Password generata:', 'Consumo: X km/l')
+- L'app deve essere AUTO-ESPLICATIVA: aprendola senza istruzioni, un utente capisce cosa fa in meno di 5 secondi
+```
 
 ```
 REGOLE GRAFICHE OBBLIGATORIE:
@@ -50,6 +62,13 @@ gioco, set, match). Mostra set vinti per ciascuno. Pulsante reset partita.
 Salvataggio automatico in localStorage. Dark mode con il verde usato solo
 come accento (non come sfondo del testo).
 
+REGOLE FUNZIONALI OBBLIGATORIE:
+- Ogni sezione dell'app deve avere un TITOLO o ETICHETTA visibile che spiega cosa fa
+- Ogni input deve avere un <label> sopra che descrive cosa inserire
+- Ogni pulsante di azione deve avere un event listener esplicito in JavaScript che produce un risultato visibile
+- Ogni output (risultato di calcolo, lista, valore generato) deve essere in un elemento HTML con etichetta visibile (es: 'Risultato:', 'Password generata:', 'Consumo: X km/l')
+- L'app deve essere AUTO-ESPLICATIVA: aprendola senza istruzioni, un utente capisce cosa fa in meno di 5 secondi
+
 REGOLE GRAFICHE OBBLIGATORIE:
 - Sfondo principale dark mode #0f1419 (o simile).
 - Testo principale chiaro #e8eaed (o simile).
@@ -67,21 +86,21 @@ REGOLE GRAFICHE OBBLIGATORIE:
 ### 2. Tennis Pong giocabile
 
 ```
-Mini gioco stile Pong su canvas HTML5, responsive (scala alla larghezza
-dello schermo mantenendo le proporzioni ~16:10, riferimento 800x500 pixel).
-Due racchette bianche verticali ai lati. Pallina che rimbalza.
+Mini gioco stile Pong su canvas HTML5 responsive (scala alla larghezza
+schermo, proporzioni ~16:10). Due racchette bianche ai lati, pallina che
+rimbalza, punteggio in alto al centro del canvas.
+Controlli: racchetta sinistra W/S, destra frecce su/giù. ANCHE touch: tap a
+sinistra/destra del canvas muove la racchetta verso il punto toccato, drag =
+movimento continuo. NESSUN movimento automatico: solo tastiera/touch.
+Usa keydown/keyup con mappa stato true/false, touchstart/touchmove, loop con
+requestAnimationFrame, movimento limitato dentro il campo. Dark mode.
 
-Racchetta sinistra: tasto W (su) e S (giù)
-Racchetta destra: freccia su e freccia giù
-Controlli touch (OLTRE alla tastiera): un tap a sinistra o a destra del
-canvas muove la rispettiva racchetta verso il punto toccato; il drag dà
-movimento continuo. Mantieni ANCHE i controlli da tastiera.
-Limita il movimento dentro il campo (no fuori dai bordi).
-Punteggio mostrato in alto al centro del canvas.
-NESSUN movimento automatico delle racchette: solo controlli tastiera/touch.
-Usa window.addEventListener keydown e keyup, mappa keys con stato true/false,
-eventi touchstart/touchmove per il tocco, loop con requestAnimationFrame.
-Dark mode.
+REGOLE FUNZIONALI OBBLIGATORIE:
+- Ogni sezione dell'app deve avere un TITOLO o ETICHETTA visibile che spiega cosa fa
+- Ogni input deve avere un <label> sopra che descrive cosa inserire
+- Ogni pulsante di azione deve avere un event listener esplicito in JavaScript che produce un risultato visibile
+- Ogni output (risultato di calcolo, lista, valore generato) deve essere in un elemento HTML con etichetta visibile (es: 'Risultato:', 'Password generata:', 'Consumo: X km/l')
+- L'app deve essere AUTO-ESPLICATIVA: aprendola senza istruzioni, un utente capisce cosa fa in meno di 5 secondi
 
 REGOLE GRAFICHE OBBLIGATORIE:
 - Sfondo principale dark mode #0f1419 (o simile).
@@ -106,6 +125,13 @@ vincenti, errori non forzati, palle break vinte.
 Pulsanti +/- per ogni voce. Salvataggio in localStorage.
 Esporta riepilogo in JSON e testo copiabile. Dark mode sportivo.
 
+REGOLE FUNZIONALI OBBLIGATORIE:
+- Ogni sezione dell'app deve avere un TITOLO o ETICHETTA visibile che spiega cosa fa
+- Ogni input deve avere un <label> sopra che descrive cosa inserire
+- Ogni pulsante di azione deve avere un event listener esplicito in JavaScript che produce un risultato visibile
+- Ogni output (risultato di calcolo, lista, valore generato) deve essere in un elemento HTML con etichetta visibile (es: 'Risultato:', 'Password generata:', 'Consumo: X km/l')
+- L'app deve essere AUTO-ESPLICATIVA: aprendola senza istruzioni, un utente capisce cosa fa in meno di 5 secondi
+
 REGOLE GRAFICHE OBBLIGATORIE:
 - Sfondo principale dark mode #0f1419 (o simile).
 - Testo principale chiaro #e8eaed (o simile).
@@ -123,13 +149,20 @@ REGOLE GRAFICHE OBBLIGATORIE:
 ### 4. Generatore dadi RPG
 
 ```
-Tiradadi virtuale per giochi di ruolo.
-Pulsanti per D4, D6, D8, D10, D12, D20, D100.
-Mostra risultato grande con animazione di tiro.
-Storia ultimi 10 tiri visibile.
-Suono di dado che rotola al click (sintetizzato con Web Audio API).
-Tema fantasy con colori scuri e accenti dorati (l'oro solo come accento,
-non come colore del testo lungo).
+Tiradadi virtuale per giochi di ruolo, con un titolo che spiega l'app.
+Una fila di pulsanti: D4, D6, D8, D10, D12, D20, D100. Al click su un dado,
+un event listener tira quel dado e mostra il risultato in un riquadro grande
+etichettato "Risultato del tiro:" con una breve animazione.
+Sotto, una sezione etichettata "Ultimi 10 tiri:" con l'elenco (tipo di dado e
+valore ottenuto). Suono di dado che rotola al click (Web Audio API).
+Tema fantasy scuro con accenti dorati (oro solo come accento, non sul testo lungo).
+
+REGOLE FUNZIONALI OBBLIGATORIE:
+- Ogni sezione dell'app deve avere un TITOLO o ETICHETTA visibile che spiega cosa fa
+- Ogni input deve avere un <label> sopra che descrive cosa inserire
+- Ogni pulsante di azione deve avere un event listener esplicito in JavaScript che produce un risultato visibile
+- Ogni output (risultato di calcolo, lista, valore generato) deve essere in un elemento HTML con etichetta visibile (es: 'Risultato:', 'Password generata:', 'Consumo: X km/l')
+- L'app deve essere AUTO-ESPLICATIVA: aprendola senza istruzioni, un utente capisce cosa fa in meno di 5 secondi
 
 REGOLE GRAFICHE OBBLIGATORIE:
 - Sfondo principale dark mode #0f1419 (o simile).
@@ -154,6 +187,13 @@ Dopo ogni tentativo dice "troppo alto" o "troppo basso".
 Conta i tentativi. Record migliore in localStorage.
 Pulsante nuova partita. Dark mode minimal.
 
+REGOLE FUNZIONALI OBBLIGATORIE:
+- Ogni sezione dell'app deve avere un TITOLO o ETICHETTA visibile che spiega cosa fa
+- Ogni input deve avere un <label> sopra che descrive cosa inserire
+- Ogni pulsante di azione deve avere un event listener esplicito in JavaScript che produce un risultato visibile
+- Ogni output (risultato di calcolo, lista, valore generato) deve essere in un elemento HTML con etichetta visibile (es: 'Risultato:', 'Password generata:', 'Consumo: X km/l')
+- L'app deve essere AUTO-ESPLICATIVA: aprendola senza istruzioni, un utente capisce cosa fa in meno di 5 secondi
+
 REGOLE GRAFICHE OBBLIGATORIE:
 - Sfondo principale dark mode #0f1419 (o simile).
 - Testo principale chiaro #e8eaed (o simile).
@@ -175,15 +215,23 @@ REGOLE GRAFICHE OBBLIGATORIE:
 ### 6. Calcolatore percentuali
 
 ```
-Calcolatrice di percentuali con 4 modalità in tab:
+Calcolatrice di percentuali con 4 modalità selezionabili da tab, ognuna con
+un titolo che spiega cosa calcola:
+- "Percentuale di un numero" (es: 22% di 350 = 77)
+- "Sconto su prezzo" (prezzo originale meno lo sconto%)
+- "Calcolo IVA 22%" (imponibile + IVA)
+- "Variazione percentuale tra due valori"
+Ogni campo ha la sua <label>. Il risultato compare in un riquadro etichettato
+"Risultato:" e si aggiorna a ogni modifica degli input.
+Dark mode con l'arancione SOLO come accento (tab attiva, CTA), mai come sfondo.
+Font grande, mobile-first.
 
-Percentuale di un numero (es: 22% di 350 = 77)
-Sconto su prezzo (prezzo originale - sconto%)
-Calcolo IVA 22% (imponibile + IVA)
-Variazione percentuale tra due valori
-Dark mode con l'arancione usato SOLO come colore di accento (pulsanti CTA,
-tab attiva, evidenziazioni), MAI come sfondo principale. Font grande.
-Mobile-first.
+REGOLE FUNZIONALI OBBLIGATORIE:
+- Ogni sezione dell'app deve avere un TITOLO o ETICHETTA visibile che spiega cosa fa
+- Ogni input deve avere un <label> sopra che descrive cosa inserire
+- Ogni pulsante di azione deve avere un event listener esplicito in JavaScript che produce un risultato visibile
+- Ogni output (risultato di calcolo, lista, valore generato) deve essere in un elemento HTML con etichetta visibile (es: 'Risultato:', 'Password generata:', 'Consumo: X km/l')
+- L'app deve essere AUTO-ESPLICATIVA: aprendola senza istruzioni, un utente capisce cosa fa in meno di 5 secondi
 
 REGOLE GRAFICHE OBBLIGATORIE:
 - Sfondo principale dark mode #0f1419 (o simile).
@@ -202,20 +250,21 @@ REGOLE GRAFICHE OBBLIGATORIE:
 ### 7. Calcolatore rata mutuo
 
 ```
-Calcolatore rata mensile mutuo. Input:
+Calcolatore rata mensile mutuo. Tre input con <label>: "Importo capitale €",
+"Tasso annuo %", "Durata in anni".
+Calcolo in tempo reale con la formula rata = C × (i/12) / (1 - (1 + i/12)^-n).
+Mostra TRE output etichettati uno per uno: "Rata mensile: € X",
+"Interessi totali: € X", "Totale rimborsato: € X".
+Tabella dei primi 12 mesi (quota interessi, quota capitale, residuo); su mobile
+la tabella diventa una lista di card (etichetta + valore affiancati).
+Dark mode finanziario.
 
-Importo capitale €
-Tasso annuo %
-Durata in anni
-Output:
-Rata mensile
-Interessi totali pagati
-Totale rimborsato
-Formula: rata = C × (i/12) / (1 - (1 + i/12)^-n)
-Mostra tabella primi 12 mesi (quota interessi, quota capitale, residuo).
-Su mobile la tabella diventa una lista verticale di card invece di righe con
-scroll orizzontale: ogni card mostra etichetta + valore affiancati.
-Ricalcola in tempo reale. Dark mode finanziario.
+REGOLE FUNZIONALI OBBLIGATORIE:
+- Ogni sezione dell'app deve avere un TITOLO o ETICHETTA visibile che spiega cosa fa
+- Ogni input deve avere un <label> sopra che descrive cosa inserire
+- Ogni pulsante di azione deve avere un event listener esplicito in JavaScript che produce un risultato visibile
+- Ogni output (risultato di calcolo, lista, valore generato) deve essere in un elemento HTML con etichetta visibile (es: 'Risultato:', 'Password generata:', 'Consumo: X km/l')
+- L'app deve essere AUTO-ESPLICATIVA: aprendola senza istruzioni, un utente capisce cosa fa in meno di 5 secondi
 
 REGOLE GRAFICHE OBBLIGATORIE:
 - Sfondo principale dark mode #0f1419 (o simile).
@@ -234,17 +283,22 @@ REGOLE GRAFICHE OBBLIGATORIE:
 ### 8. Calcolatore consumo carburante
 
 ```
-Calcolatore consumo medio veicolo. Input:
+Calcolatore consumo medio veicolo. Tre input con <label>: "Km percorsi",
+"Litri consumati", "Prezzo al litro €".
+Un pulsante "Calcola" con event listener esplicito calcola e mostra TRE output,
+ognuno etichettato in modo visibile:
+- "Consumo: X km/litro"
+- "Costo per km: € X"
+- "Costo per 100 km: € X"
+Sezione "Storico rifornimenti" (ultimi 10) salvata in localStorage con data
+automatica e media consumo. Dark mode automotive.
 
-Km percorsi
-Litri consumati
-Prezzo al litro €
-Output:
-Consumo km/litro
-Costo per km
-Costo per 100 km
-Storico ultimi 10 rifornimenti in localStorage con data automatica.
-Media consumo storica. Dark mode automotive.
+REGOLE FUNZIONALI OBBLIGATORIE:
+- Ogni sezione dell'app deve avere un TITOLO o ETICHETTA visibile che spiega cosa fa
+- Ogni input deve avere un <label> sopra che descrive cosa inserire
+- Ogni pulsante di azione deve avere un event listener esplicito in JavaScript che produce un risultato visibile
+- Ogni output (risultato di calcolo, lista, valore generato) deve essere in un elemento HTML con etichetta visibile (es: 'Risultato:', 'Password generata:', 'Consumo: X km/l')
+- L'app deve essere AUTO-ESPLICATIVA: aprendola senza istruzioni, un utente capisce cosa fa in meno di 5 secondi
 
 REGOLE GRAFICHE OBBLIGATORIE:
 - Sfondo principale dark mode #0f1419 (o simile).
@@ -263,11 +317,20 @@ REGOLE GRAFICHE OBBLIGATORIE:
 ### 9. Convertitore valute (cambio fisso)
 
 ```
-Convertitore valute con cambi fissi configurabili dall'utente.
-Input: importo + valuta di partenza + valuta di arrivo.
-Valute predefinite: EUR, USD, GBP, CHF, JPY.
-Cambi modificabili dall'utente, salvati in localStorage.
-Conversione in tempo reale. Dark mode pulito.
+Convertitore di valute con cambi fissi configurabili dall'utente.
+Input con <label>: "Importo", "Valuta di partenza", "Valuta di arrivo"
+(EUR, USD, GBP, CHF, JPY).
+La conversione si aggiorna in tempo reale (listener sugli input) e il risultato
+compare in un riquadro etichettato "Convertito:" con importo e valuta.
+Sezione "Tassi di cambio" modificabili dall'utente e salvati in localStorage.
+Dark mode pulito.
+
+REGOLE FUNZIONALI OBBLIGATORIE:
+- Ogni sezione dell'app deve avere un TITOLO o ETICHETTA visibile che spiega cosa fa
+- Ogni input deve avere un <label> sopra che descrive cosa inserire
+- Ogni pulsante di azione deve avere un event listener esplicito in JavaScript che produce un risultato visibile
+- Ogni output (risultato di calcolo, lista, valore generato) deve essere in un elemento HTML con etichetta visibile (es: 'Risultato:', 'Password generata:', 'Consumo: X km/l')
+- L'app deve essere AUTO-ESPLICATIVA: aprendola senza istruzioni, un utente capisce cosa fa in meno di 5 secondi
 
 REGOLE GRAFICHE OBBLIGATORIE:
 - Sfondo principale dark mode #0f1419 (o simile).
@@ -286,16 +349,20 @@ REGOLE GRAFICHE OBBLIGATORIE:
 ### 10. Calcolatore mancia ristorante
 
 ```
-Calcolatore mancia per ristorante. Input:
+Calcolatore mancia per ristorante. Input con <label>: "Totale conto €",
+"Percentuale mancia" (slider 0-25% con valore mostrato), "Numero persone".
+Aggiornamento in tempo reale, con TRE output etichettati singolarmente:
+- "Mancia: € X"
+- "Totale con mancia: € X"
+- "Per persona: € X"
+Pulsanti rapidi 10%, 15%, 20% che impostano lo slider. Dark mode elegante.
 
-Totale conto €
-Percentuale mancia (slider 0-25%)
-Numero persone
-Output:
-Importo mancia
-Totale con mancia
-Totale per persona
-Pulsanti rapidi 10%, 15%, 20%. Dark mode elegante.
+REGOLE FUNZIONALI OBBLIGATORIE:
+- Ogni sezione dell'app deve avere un TITOLO o ETICHETTA visibile che spiega cosa fa
+- Ogni input deve avere un <label> sopra che descrive cosa inserire
+- Ogni pulsante di azione deve avere un event listener esplicito in JavaScript che produce un risultato visibile
+- Ogni output (risultato di calcolo, lista, valore generato) deve essere in un elemento HTML con etichetta visibile (es: 'Risultato:', 'Password generata:', 'Consumo: X km/l')
+- L'app deve essere AUTO-ESPLICATIVA: aprendola senza istruzioni, un utente capisce cosa fa in meno di 5 secondi
 
 REGOLE GRAFICHE OBBLIGATORIE:
 - Sfondo principale dark mode #0f1419 (o simile).
@@ -318,13 +385,21 @@ REGOLE GRAFICHE OBBLIGATORIE:
 ### 11. Timer Pomodoro classico
 
 ```
-Timer Pomodoro. Cicli 25 minuti lavoro + 5 minuti pausa.
-Dopo 4 cicli completi, pausa lunga 15 minuti.
-Display grande mm:ss su sfondo dark mode con testo chiaro (il rosso è solo
-un accento, non lo sfondo del display). Pulsanti Start, Pausa, Reset.
-Beep sonoro a fine sessione con Web Audio API.
-Contatore cicli completati oggi (salvato localStorage).
-Dark mode con accento rosso pomodoro.
+Timer Pomodoro con durate CONFIGURABILI da input number (non valori fissi),
+ognuno con la sua <label>: "Minuti lavoro" (default 25), "Minuti pausa"
+(default 5), "Pausa lunga" (default 15), "Cicli prima della pausa lunga"
+(default 4).
+Display grande mm:ss su sfondo dark con testo chiaro (il rosso è solo accento).
+Etichetta della fase corrente ("Lavoro" / "Pausa"). Pulsanti Start, Pausa,
+Reset con event listener. Beep a fine fase (Web Audio API). Contatore cicli di
+oggi salvato in localStorage. Dark mode con accento rosso pomodoro.
+
+REGOLE FUNZIONALI OBBLIGATORIE:
+- Ogni sezione dell'app deve avere un TITOLO o ETICHETTA visibile che spiega cosa fa
+- Ogni input deve avere un <label> sopra che descrive cosa inserire
+- Ogni pulsante di azione deve avere un event listener esplicito in JavaScript che produce un risultato visibile
+- Ogni output (risultato di calcolo, lista, valore generato) deve essere in un elemento HTML con etichetta visibile (es: 'Risultato:', 'Password generata:', 'Consumo: X km/l')
+- L'app deve essere AUTO-ESPLICATIVA: aprendola senza istruzioni, un utente capisce cosa fa in meno di 5 secondi
 
 REGOLE GRAFICHE OBBLIGATORIE:
 - Sfondo principale dark mode #0f1419 (o simile).
@@ -343,12 +418,20 @@ REGOLE GRAFICHE OBBLIGATORIE:
 ### 12. Cronometro con giri
 
 ```
-Cronometro a tre pulsanti: Start, Stop, Lap, Reset.
+Cronometro con pulsanti Start, Stop, Lap, Reset (ognuno con event listener).
 Display grande in formato hh:mm:ss.cc.
-Lista dei giri con tempo parziale e cumulativo.
-Evidenzia il giro più veloce e il più lento usando TESTO colorato (verde e
-rosso) su sfondo scuro, non sfondo colorato con testo chiaro.
+Ogni "Lap" aggiunge una riga alla lista dei giri: numero del giro + tempo
+parziale + tempo cumulativo, in font monospace, su sfondo dark con bordo e
+testo chiaro (MAI testo scuro su sfondo scuro).
+Evidenzia con TESTO colorato il giro più veloce (verde) e il più lento (rosso).
 Salvataggio sessione in localStorage. Dark mode sportivo.
+
+REGOLE FUNZIONALI OBBLIGATORIE:
+- Ogni sezione dell'app deve avere un TITOLO o ETICHETTA visibile che spiega cosa fa
+- Ogni input deve avere un <label> sopra che descrive cosa inserire
+- Ogni pulsante di azione deve avere un event listener esplicito in JavaScript che produce un risultato visibile
+- Ogni output (risultato di calcolo, lista, valore generato) deve essere in un elemento HTML con etichetta visibile (es: 'Risultato:', 'Password generata:', 'Consumo: X km/l')
+- L'app deve essere AUTO-ESPLICATIVA: aprendola senza istruzioni, un utente capisce cosa fa in meno di 5 secondi
 
 REGOLE GRAFICHE OBBLIGATORIE:
 - Sfondo principale dark mode #0f1419 (o simile).
@@ -372,6 +455,13 @@ Display grande dell'ora corrente in tempo reale.
 Quando l'ora arriva, suono ripetuto con Web Audio API e popup.
 Pulsante "Snooze" che rinvia di 5 minuti.
 Salva ultima sveglia impostata in localStorage. Dark mode notturno.
+
+REGOLE FUNZIONALI OBBLIGATORIE:
+- Ogni sezione dell'app deve avere un TITOLO o ETICHETTA visibile che spiega cosa fa
+- Ogni input deve avere un <label> sopra che descrive cosa inserire
+- Ogni pulsante di azione deve avere un event listener esplicito in JavaScript che produce un risultato visibile
+- Ogni output (risultato di calcolo, lista, valore generato) deve essere in un elemento HTML con etichetta visibile (es: 'Risultato:', 'Password generata:', 'Consumo: X km/l')
+- L'app deve essere AUTO-ESPLICATIVA: aprendola senza istruzioni, un utente capisce cosa fa in meno di 5 secondi
 
 REGOLE GRAFICHE OBBLIGATORIE:
 - Sfondo principale dark mode #0f1419 (o simile).
@@ -409,6 +499,13 @@ IVA 22%
 TOTALE
 Ricalcola in tempo reale ad ogni modifica. Font 18px, pulsanti grandi.
 
+REGOLE FUNZIONALI OBBLIGATORIE:
+- Ogni sezione dell'app deve avere un TITOLO o ETICHETTA visibile che spiega cosa fa
+- Ogni input deve avere un <label> sopra che descrive cosa inserire
+- Ogni pulsante di azione deve avere un event listener esplicito in JavaScript che produce un risultato visibile
+- Ogni output (risultato di calcolo, lista, valore generato) deve essere in un elemento HTML con etichetta visibile (es: 'Risultato:', 'Password generata:', 'Consumo: X km/l')
+- L'app deve essere AUTO-ESPLICATIVA: aprendola senza istruzioni, un utente capisce cosa fa in meno di 5 secondi
+
 REGOLE GRAFICHE OBBLIGATORIE:
 - Sfondo principale dark mode #0f1419 (o simile).
 - Testo principale chiaro #e8eaed (o simile).
@@ -434,6 +531,13 @@ Aggiungi giornate (storico salvato in localStorage).
 Totale ore per ciascun operaio nel mese.
 Esporta riepilogo in JSON. Dark mode con accento arancione cantiere.
 
+REGOLE FUNZIONALI OBBLIGATORIE:
+- Ogni sezione dell'app deve avere un TITOLO o ETICHETTA visibile che spiega cosa fa
+- Ogni input deve avere un <label> sopra che descrive cosa inserire
+- Ogni pulsante di azione deve avere un event listener esplicito in JavaScript che produce un risultato visibile
+- Ogni output (risultato di calcolo, lista, valore generato) deve essere in un elemento HTML con etichetta visibile (es: 'Risultato:', 'Password generata:', 'Consumo: X km/l')
+- L'app deve essere AUTO-ESPLICATIVA: aprendola senza istruzioni, un utente capisce cosa fa in meno di 5 secondi
+
 REGOLE GRAFICHE OBBLIGATORIE:
 - Sfondo principale dark mode #0f1419 (o simile).
 - Testo principale chiaro #e8eaed (o simile).
@@ -457,6 +561,13 @@ Ricerca per nome. Filtro per categoria.
 Salvataggio in localStorage. Esporta listino in JSON.
 Modalità "consultazione cliente" (vista pulita senza pulsanti modifica).
 Dark mode professionale.
+
+REGOLE FUNZIONALI OBBLIGATORIE:
+- Ogni sezione dell'app deve avere un TITOLO o ETICHETTA visibile che spiega cosa fa
+- Ogni input deve avere un <label> sopra che descrive cosa inserire
+- Ogni pulsante di azione deve avere un event listener esplicito in JavaScript che produce un risultato visibile
+- Ogni output (risultato di calcolo, lista, valore generato) deve essere in un elemento HTML con etichetta visibile (es: 'Risultato:', 'Password generata:', 'Consumo: X km/l')
+- L'app deve essere AUTO-ESPLICATIVA: aprendola senza istruzioni, un utente capisce cosa fa in meno di 5 secondi
 
 REGOLE GRAFICHE OBBLIGATORIE:
 - Sfondo principale dark mode #0f1419 (o simile).
@@ -488,6 +599,13 @@ Su mobile la tabella diventa una lista verticale di card invece di righe con
 scroll orizzontale: ogni card mostra etichetta + valore affiancati.
 Dark mode business.
 
+REGOLE FUNZIONALI OBBLIGATORIE:
+- Ogni sezione dell'app deve avere un TITOLO o ETICHETTA visibile che spiega cosa fa
+- Ogni input deve avere un <label> sopra che descrive cosa inserire
+- Ogni pulsante di azione deve avere un event listener esplicito in JavaScript che produce un risultato visibile
+- Ogni output (risultato di calcolo, lista, valore generato) deve essere in un elemento HTML con etichetta visibile (es: 'Risultato:', 'Password generata:', 'Consumo: X km/l')
+- L'app deve essere AUTO-ESPLICATIVA: aprendola senza istruzioni, un utente capisce cosa fa in meno di 5 secondi
+
 REGOLE GRAFICHE OBBLIGATORIE:
 - Sfondo principale dark mode #0f1419 (o simile).
 - Testo principale chiaro #e8eaed (o simile).
@@ -516,6 +634,13 @@ Aggiungi articolo selezionando categoria. Checkbox per spuntare come preso.
 Ordina mostrando non presi prima. Salvataggio localStorage.
 Pulsante "Copia per WhatsApp" che genera testo lista formattato. Dark mode.
 
+REGOLE FUNZIONALI OBBLIGATORIE:
+- Ogni sezione dell'app deve avere un TITOLO o ETICHETTA visibile che spiega cosa fa
+- Ogni input deve avere un <label> sopra che descrive cosa inserire
+- Ogni pulsante di azione deve avere un event listener esplicito in JavaScript che produce un risultato visibile
+- Ogni output (risultato di calcolo, lista, valore generato) deve essere in un elemento HTML con etichetta visibile (es: 'Risultato:', 'Password generata:', 'Consumo: X km/l')
+- L'app deve essere AUTO-ESPLICATIVA: aprendola senza istruzioni, un utente capisce cosa fa in meno di 5 secondi
+
 REGOLE GRAFICHE OBBLIGATORIE:
 - Sfondo principale dark mode #0f1419 (o simile).
 - Testo principale chiaro #e8eaed (o simile).
@@ -541,6 +666,13 @@ procedimento (textarea).
 Ricerca per nome o ingrediente. Filtro per categoria.
 Pulsante stampa ricetta singola. Salvataggio in localStorage. Dark mode.
 
+REGOLE FUNZIONALI OBBLIGATORIE:
+- Ogni sezione dell'app deve avere un TITOLO o ETICHETTA visibile che spiega cosa fa
+- Ogni input deve avere un <label> sopra che descrive cosa inserire
+- Ogni pulsante di azione deve avere un event listener esplicito in JavaScript che produce un risultato visibile
+- Ogni output (risultato di calcolo, lista, valore generato) deve essere in un elemento HTML con etichetta visibile (es: 'Risultato:', 'Password generata:', 'Consumo: X km/l')
+- L'app deve essere AUTO-ESPLICATIVA: aprendola senza istruzioni, un utente capisce cosa fa in meno di 5 secondi
+
 REGOLE GRAFICHE OBBLIGATORIE:
 - Sfondo principale dark mode #0f1419 (o simile).
 - Testo principale chiaro #e8eaed (o simile).
@@ -565,6 +697,13 @@ Lista filtrabile per tipo, regione, annata.
 Ordina per voto o prezzo. Conta totale bottiglie.
 Esporta in JSON. Dark mode enoteca.
 
+REGOLE FUNZIONALI OBBLIGATORIE:
+- Ogni sezione dell'app deve avere un TITOLO o ETICHETTA visibile che spiega cosa fa
+- Ogni input deve avere un <label> sopra che descrive cosa inserire
+- Ogni pulsante di azione deve avere un event listener esplicito in JavaScript che produce un risultato visibile
+- Ogni output (risultato di calcolo, lista, valore generato) deve essere in un elemento HTML con etichetta visibile (es: 'Risultato:', 'Password generata:', 'Consumo: X km/l')
+- L'app deve essere AUTO-ESPLICATIVA: aprendola senza istruzioni, un utente capisce cosa fa in meno di 5 secondi
+
 REGOLE GRAFICHE OBBLIGATORIE:
 - Sfondo principale dark mode #0f1419 (o simile).
 - Testo principale chiaro #e8eaed (o simile).
@@ -583,11 +722,19 @@ REGOLE GRAFICHE OBBLIGATORIE:
 
 ```
 Calcolatore per scalare le porzioni di una ricetta.
-Input: ingredienti originali (lista nome + quantità + unità),
-porzioni originali, porzioni desiderate.
-Output: lista ingredienti con quantità ricalcolate proporzionalmente.
-Esempio: 4 porzioni → 6 porzioni, tutte le quantità ×1.5.
+Input con <label>: "Ingredienti" (una riga per ingrediente: nome + quantità +
+unità), "Porzioni originali", "Porzioni desiderate".
+Un pulsante "Scala ricetta" con event listener calcola il fattore
+(desiderate / originali) e mostra, sotto l'etichetta "Ingredienti ricalcolati:",
+la lista con le quantità moltiplicate per il fattore (es: 4 → 6 porzioni = ×1.5).
 Pulsante stampa ricetta scalata. Dark mode cucina.
+
+REGOLE FUNZIONALI OBBLIGATORIE:
+- Ogni sezione dell'app deve avere un TITOLO o ETICHETTA visibile che spiega cosa fa
+- Ogni input deve avere un <label> sopra che descrive cosa inserire
+- Ogni pulsante di azione deve avere un event listener esplicito in JavaScript che produce un risultato visibile
+- Ogni output (risultato di calcolo, lista, valore generato) deve essere in un elemento HTML con etichetta visibile (es: 'Risultato:', 'Password generata:', 'Consumo: X km/l')
+- L'app deve essere AUTO-ESPLICATIVA: aprendola senza istruzioni, un utente capisce cosa fa in meno di 5 secondi
 
 REGOLE GRAFICHE OBBLIGATORIE:
 - Sfondo principale dark mode #0f1419 (o simile).
@@ -610,13 +757,21 @@ REGOLE GRAFICHE OBBLIGATORIE:
 ### 22. Diario rapido
 
 ```
-Diario personale veloce. Textarea per scrivere pensiero del momento.
-Pulsante salva: aggiunge alla lista con timestamp automatico.
-Lista pensieri ordinati per data più recente.
-Ricerca testuale. Editor markdown semplice
-(grassetto testo, corsivo testo, lista - voce).
-Esporta tutto in JSON o file di testo.
+Diario personale veloce. Textarea con <label> "Scrivi un pensiero".
+Sopra la textarea, pulsanti di formattazione markdown (Grassetto, Corsivo,
+Lista), ognuno con event listener esplicito che inserisce la sintassi nel testo
+selezionato.
+Pulsante "Salva" che aggiunge il pensiero a una lista etichettata "I tuoi
+pensieri", ordinata per data più recente, con timestamp automatico.
+Ricerca testuale. Esporta tutto in JSON o file di testo.
 Dark mode notturno gentile per gli occhi.
+
+REGOLE FUNZIONALI OBBLIGATORIE:
+- Ogni sezione dell'app deve avere un TITOLO o ETICHETTA visibile che spiega cosa fa
+- Ogni input deve avere un <label> sopra che descrive cosa inserire
+- Ogni pulsante di azione deve avere un event listener esplicito in JavaScript che produce un risultato visibile
+- Ogni output (risultato di calcolo, lista, valore generato) deve essere in un elemento HTML con etichetta visibile (es: 'Risultato:', 'Password generata:', 'Consumo: X km/l')
+- L'app deve essere AUTO-ESPLICATIVA: aprendola senza istruzioni, un utente capisce cosa fa in meno di 5 secondi
 
 REGOLE GRAFICHE OBBLIGATORIE:
 - Sfondo principale dark mode #0f1419 (o simile).
@@ -641,6 +796,13 @@ A fine ciclo, il task ha +1 pomodoro completato.
 Al termine della giornata, vedi quanti Pomodoro per ogni task.
 Salvataggio storico in localStorage. Dark mode focus.
 
+REGOLE FUNZIONALI OBBLIGATORIE:
+- Ogni sezione dell'app deve avere un TITOLO o ETICHETTA visibile che spiega cosa fa
+- Ogni input deve avere un <label> sopra che descrive cosa inserire
+- Ogni pulsante di azione deve avere un event listener esplicito in JavaScript che produce un risultato visibile
+- Ogni output (risultato di calcolo, lista, valore generato) deve essere in un elemento HTML con etichetta visibile (es: 'Risultato:', 'Password generata:', 'Consumo: X km/l')
+- L'app deve essere AUTO-ESPLICATIVA: aprendola senza istruzioni, un utente capisce cosa fa in meno di 5 secondi
+
 REGOLE GRAFICHE OBBLIGATORIE:
 - Sfondo principale dark mode #0f1419 (o simile).
 - Testo principale chiaro #e8eaed (o simile).
@@ -662,14 +824,21 @@ REGOLE GRAFICHE OBBLIGATORIE:
 ### 24. Generatore password sicure
 
 ```
-Generatore password configurabile.
-Slider lunghezza 8-32 caratteri.
-Checkbox per includere: minuscole, maiuscole, numeri, simboli speciali.
-Password generata in font monospace grande.
-Pulsante "Copia" copia negli appunti.
+Generatore di password configurabile.
+Controlli con <label>: slider "Lunghezza" (8-32, valore mostrato), checkbox
+"Minuscole", "Maiuscole", "Numeri", "Simboli".
+Un pulsante "Genera password" con event listener esplicito crea la password e
+la mostra in un riquadro etichettato "Password generata:" in font monospace
+grande. Pulsante "Copia" che copia negli appunti (con conferma).
 Indicatore forza (debole/media/forte/fortissima) con barra colorata.
-Storia ultime 5 password generate (solo in memoria, non salvate).
-Dark mode security.
+Storia delle ultime 5 password (solo in memoria). Dark mode security.
+
+REGOLE FUNZIONALI OBBLIGATORIE:
+- Ogni sezione dell'app deve avere un TITOLO o ETICHETTA visibile che spiega cosa fa
+- Ogni input deve avere un <label> sopra che descrive cosa inserire
+- Ogni pulsante di azione deve avere un event listener esplicito in JavaScript che produce un risultato visibile
+- Ogni output (risultato di calcolo, lista, valore generato) deve essere in un elemento HTML con etichetta visibile (es: 'Risultato:', 'Password generata:', 'Consumo: X km/l')
+- L'app deve essere AUTO-ESPLICATIVA: aprendola senza istruzioni, un utente capisce cosa fa in meno di 5 secondi
 
 REGOLE GRAFICHE OBBLIGATORIE:
 - Sfondo principale dark mode #0f1419 (o simile).

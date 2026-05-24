@@ -539,7 +539,7 @@ input[type="range"] { width: 100%; accent-color: var(--accento); cursor: pointer
 .faq-domanda:hover { background: var(--pannello-2); }
 .faq-domanda .freccia { transition: var(--transizione); color: var(--testo-debole); }
 .faq-domanda.aperta .freccia { transform: rotate(180deg); }
-.faq-risposta { padding: 0 18px 16px; font-size: .9rem; color: var(--testo-soft); }
+.faq-risposta { padding: 0 18px 16px; font-size: .9rem; color: var(--testo-soft); white-space: pre-line; }
 
 /* Flash di evidenziazione della textarea quando si precompila un prompt */
 @keyframes flashEvidenzia {
