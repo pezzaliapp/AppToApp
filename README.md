@@ -85,11 +85,17 @@ python3 -m http.server 8000
 
 ## 📸 Screenshot
 
-> _Placeholder — sostituire con screenshot reali._
+**La home di AppToApp**
 
-| Generazione | Anteprima + editor | Impostazioni |
-|---|---|---|
-| ![Genera](assets/screenshot-genera.png) | ![Anteprima](assets/screenshot-anteprima.png) | ![Impostazioni](assets/screenshot-impostazioni.png) |
+![Home di AppToApp](assets/screenshots/home.png)
+
+**Esempi di app prodotte** — calcolatrice e timer Pomodoro, dark e già funzionanti:
+
+<p align="center">
+  <img src="assets/screenshots/calcolatrice.png" alt="App calcolatrice generata" width="46%">
+  &nbsp;&nbsp;
+  <img src="assets/screenshots/pomodoro.png" alt="App timer Pomodoro generata" width="46%">
+</p>
 
 ## 🔒 Sicurezza e privacy
 
