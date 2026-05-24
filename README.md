@@ -1,118 +1,106 @@
-<div align="center">
+# AppToApp
 
-# A → A · AppToApp
+> Trasforma una frase in un'app web vera. Gratis, per sempre.
 
-**La meta-app che trasforma una frase in un'app web completa.**
+**AppToApp** è un generatore di applicazioni web che funziona nel tuo browser. 
+Descrivi a parole l'app che vuoi e ottieni codice HTML/CSS/JS pronto da usare, 
+scaricare e pubblicare. Nessun abbonamento, nessun backend, nessun costo.
 
-Descrivi cosa vuoi → premi *Genera* → ottieni una web app pronta, elegante,
-installabile come PWA e scaricabile in `.zip`. Tutto nel browser, **a costo zero**.
+🌐 **Provala subito:** https://pezzaliapp.github.io/AppToApp/
 
-`HTML + CSS + JS vanilla` · `Alpine.js` · `PWA` · `Nessun backend`
+## ✨ Caratteristiche
 
-</div>
+- **Costo zero, per sempre.** Usi la tua chiave gratuita di Google Gemini, 
+  Groq o OpenRouter. La chiave resta nel tuo browser, mai sui nostri server 
+  (non abbiamo server).
+- **Funziona offline dopo l'export.** Ogni app generata è scaricabile come 
+  .zip standalone, eseguibile aprendo `index.html` senza internet.
+- **PWA installabile.** Aggiungi AppToApp alla Home del telefono o al Dock 
+  del Mac. Funziona come app nativa.
+- **6 template pronti.** Calcolatrice, To-do, Timer Pomodoro, Landing page, 
+  Dashboard, oppure AI libera per partire da zero.
+- **Anteprima live.** Vedi subito l'app generata in un iframe sicuro. 
+  Esporta, rigenera, modifica.
+- **Open source MIT.** Il codice è tuo. Forkalo, modificalo, vendilo.
+
+## 🚀 Come iniziare in 60 secondi
+
+1. Apri https://pezzaliapp.github.io/AppToApp/
+2. Vai su **Impostazioni** → incolla una chiave API gratuita
+3. Torna su **Genera** → descrivi l'app che vuoi
+4. Premi **Genera app** → in 10-20 secondi hai la tua app
+
+### Dove prendere una chiave gratuita
+
+| Provider | Limite gratuito | Velocità | Link |
+|----------|-----------------|----------|------|
+| **Groq** ⭐ consigliato | Generoso, mai esaurito in uso normale | Velocissimo | https://console.groq.com/keys |
+| **Google Gemini** | 1.500 richieste/giorno | Medio | https://aistudio.google.com/apikey |
+| **OpenRouter** | Modelli `:free` vari | Variabile | https://openrouter.ai/keys |
+
+Nessun provider richiede carta di credito.
+
+## 📦 Cosa puoi fare con un'app generata
+
+### A) Provarla nell'anteprima
+L'anteprima live nel riquadro sinistro è interattiva. Clicca, digita, prova.
+
+### B) Scaricarla e usarla offline
+1. Premi **📦 Esporta .zip**
+2. Apri il file zip scaricato (doppio click)
+3. Dentro la cartella estratta, doppio click su `index.html`
+4. L'app si apre nel browser e funziona offline, senza internet
+5. Puoi spostarla su chiavetta USB, Dropbox, mandarla via email
+
+### C) Pubblicarla online gratis su GitHub Pages
+1. Premi **🚀 Pubblica** in AppToApp per leggere le istruzioni
+2. Crea un account gratuito su https://github.com
+3. Crea una nuova repository (es: `mia-app`)
+4. Carica i file della cartella estratta dallo zip
+5. Vai su **Settings → Pages → Source: main branch → root → Save**
+6. In 1-2 minuti la tua app è online su 
+   `https://tuonome.github.io/mia-app/`
+7. Condividi il link con chiunque. Gratis, senza scadenza.
+
+## 💡 30 prompt di esempio testati
+
+Vedi il file [docs/ESEMPI.md](docs/ESEMPI.md) per 30 prompt pronti, 
+divisi per categoria, che producono app funzionanti.
+
+I migliori per iniziare:
+- 🧮 **Calcolatore percentuali** — sconti, IVA, variazioni
+- ⏱️ **Timer Pomodoro** — cicli lavoro/pausa con suono
+- 🎮 **Tennis Pong** — gioco classico canvas
+- 🏪 **Preventivo officina** — manodopera + ricambi + IVA
+- 📊 **Habit tracker** — abitudini giornaliere con streak
+- 🍴 **Lista spesa intelligente** — con categorie e WhatsApp export
+
+## 🛡️ Privacy e sicurezza
+
+- La tua chiave API resta nel `localStorage` del tuo browser. Mai inviata 
+  a server di AppToApp (non esistono).
+- Le chiamate ai modelli AI vanno direttamente dal tuo browser al provider 
+  che hai scelto.
+- L'anteprima delle app generate gira in `iframe sandbox`, isolata dalla 
+  pagina principale.
+- L'output dei modelli viene validato prima di essere mostrato.
+
+## 🧰 Tecnologie
+
+HTML5, CSS3, JavaScript vanilla, Alpine.js per la reattività, JSZip per 
+l'export, IndexedDB per la cronologia. Nessun framework pesante. 
+Codice leggibile da un umano, commentato in italiano.
+
+## 🤝 Contribuire
+
+Le issue e le pull request sono benvenute. 
+Per segnalazioni: https://github.com/pezzaliapp/AppToApp/issues
+
+## 📜 Licenza
+
+MIT © 2026 pezzaliAPP / Alessandro Pezzali
 
 ---
 
-## 💸 Costo: € 0, sempre
-
-AppToApp non genera **nessun costo** né per chi la sviluppa né per chi la usa:
-
-- Nessun server proprietario: gira **interamente nel browser**.
-- Usa di default le API **gratuite** di Google AI Studio (Gemini 2.5 Flash):
-  1.500 richieste/giorno, 1M token/min, **nessuna carta di credito richiesta**.
-- La tua chiave API resta **solo nel tuo browser** (`localStorage`): non viene mai
-  inviata a server di AppToApp, non finisce mai nel repository, mai negli URL.
-
-## 🔑 Come ottenere gratis una chiave Gemini (3 click)
-
-1. Apri **[aistudio.google.com/apikey](https://aistudio.google.com/apikey)**
-2. Accedi con il tuo account Google e premi **"Create API key"**
-3. Copia la chiave e incollala in **AppToApp → Impostazioni**
-
-Fatto. Nessun pagamento, nessun abbonamento.
-
-### Provider alternativi (opzionali)
-
-Dalle Impostazioni puoi scegliere un altro provider gratuito:
-
-| Provider | Modello consigliato | Chiave |
-|---|---|---|
-| **Google Gemini** *(default)* | `gemini-2.5-flash` | [aistudio.google.com/apikey](https://aistudio.google.com/apikey) |
-| **Groq** | `llama-3.3-70b-versatile` | [console.groq.com/keys](https://console.groq.com/keys) |
-| **OpenRouter** | `deepseek/deepseek-r1:free` | [openrouter.ai/keys](https://openrouter.ai/keys) |
-
-## ✨ Funzionalità
-
-- 📝 Input testuale: descrivi l'app che vuoi.
-- 🧩 Template di partenza (calcolatrice, to-do, timer Pomodoro…) o **AI libera**.
-- ⚡ Generazione one-shot → JSON `{nome, descrizione, html, css, js, manifest}`.
-- 👀 Anteprima live in `iframe` **sandboxed** (`allow-scripts`, mai `allow-same-origin`).
-- ✏️ Editor laterale con evidenziazione sintassi (highlight.js) e modifica live.
-- 📦 **Esporta `.zip`**: file statici, si apre con doppio click su `index.html`.
-- 🚀 Istruzioni guidate per **pubblicare su GitHub Pages**.
-- 🕘 Cronologia delle app generate (IndexedDB, sul tuo dispositivo).
-- ⚙️ Impostazioni: provider, chiave, modello, temperatura.
-
-## 🏗️ Architettura
-
-Frontend puro, zero build, zero dipendenze installate. Tutto da CDN.
-
-```
-/index.html          Shell PWA + interfaccia
-/app.js              Stato e logica UI (Alpine.js)
-/styles.css          Stile globale (dark, minimale)
-/manifest.json       Manifest PWA
-/sw.js               Service worker (offline shell)
-/lib/
-  llm.js             Adattatore multi-provider (Gemini / Groq / OpenRouter)
-  generator.js       Orchestratore + prompt di sistema curato
-  exporter.js        Impacchettamento .zip (JSZip da CDN)
-  templates.js       Registro template
-  storage.js         Wrapper IndexedDB (cronologia)
-/templates/          App di esempio standalone (calculator, todo, pomodoro-timer,
-                     landing-page, dashboard)
-/assets/icons/       Icone PWA (192, 512, maskable)
-```
-
-## 🚀 Avvio locale
-
-Nessuna installazione. Serve solo un server statico (per il service worker e i moduli ES):
-
-```bash
-cd AppToApp
-python3 -m http.server 8000
-# apri http://localhost:8000
-```
-
-## 📸 Screenshot
-
-**La home di AppToApp**
-
-![Home di AppToApp](assets/screenshots/home.png)
-
-**Esempi di app prodotte** — calcolatrice e timer Pomodoro, dark e già funzionanti:
-
-<p align="center">
-  <img src="assets/screenshots/calcolatrice.png" alt="App calcolatrice generata" width="46%">
-  &nbsp;&nbsp;
-  <img src="assets/screenshots/pomodoro.png" alt="App timer Pomodoro generata" width="46%">
-</p>
-
-## 🔒 Sicurezza e privacy
-
-- La chiave API resta **nel tuo browser**, mai su server di AppToApp.
-- L'anteprima gira in un `iframe` **sandboxed** senza accesso all'origine.
-- L'output del modello viene **validato** (JSON `try/catch`) prima del rendering.
-
-## 🗺️ Roadmap
-
-- [ ] Generazione multi-file più ricca (più pagine, routing client-side).
-- [ ] Galleria template ampliata (dashboard, landing, kanban, quiz…).
-- [ ] Esportazione diretta su GitHub Pages via OAuth device-flow (opzionale).
-- [ ] Modalità "rifinisci": prompt iterativi sulla stessa app.
-- [ ] Temi chiari/scuri per le app generate.
-- [ ] Import/export della cronologia.
-
-## 📄 Licenza
-
-[MIT](LICENSE) © 2026 **pezzaliAPP / Alessandro Pezzali**
+**AppToApp** è un progetto open source di **pezzaliAPP**. 
+Scopri altri progetti su https://www.alessandropezzali.it
