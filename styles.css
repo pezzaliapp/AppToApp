@@ -455,6 +455,99 @@ input[type="range"] { width: 100%; accent-color: var(--accento); cursor: pointer
 .chip { font-size: .72rem; font-weight: 700; padding: 3px 9px; border-radius: 999px;
   background: var(--pannello-2); border: 1px solid var(--bordo); color: var(--testo-soft); }
 
+/* ---- Schermata Esempi --------------------------------------------------- */
+/* a) Card "Come usare AppToApp" */
+.esempi-intro {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  margin-top: 18px;
+}
+.card-uso {
+  background: var(--pannello);
+  border: 1px solid var(--bordo);
+  border-radius: var(--raggio-lg);
+  padding: 20px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.card-uso .titoletto { font-weight: 700; font-size: 1.05rem; display: flex; align-items: center; gap: 8px; }
+.card-uso .descr-uso { font-size: .9rem; color: var(--testo-soft); flex: 1; }
+.card-uso code { font-family: var(--mono); font-size: .82em;
+  background: var(--pannello-2); padding: 1px 5px; border-radius: 5px; }
+
+/* Accordion "Mostra passi" */
+.accordion-toggle {
+  align-self: flex-start;
+  background: transparent; border: 1px solid var(--bordo);
+  color: var(--accento-soft); font-weight: 600; font-size: .82rem;
+  padding: 6px 12px; border-radius: var(--raggio-sm); cursor: pointer;
+  transition: var(--transizione);
+}
+.accordion-toggle:hover { background: var(--pannello-2); border-color: var(--bordo-chiaro); }
+.accordion-corpo {
+  font-size: .88rem; color: var(--testo-soft);
+  border-left: 2px solid var(--bordo-chiaro); padding-left: 14px; margin-top: 2px;
+}
+.accordion-corpo ol { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
+.accordion-corpo strong { color: var(--testo); }
+
+/* b) Filtri categoria (tab a pillola) */
+.filtri-categoria { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 22px; }
+.filtri-categoria button {
+  background: var(--pannello); border: 1px solid var(--bordo);
+  color: var(--testo-soft); padding: 8px 14px; border-radius: 999px;
+  cursor: pointer; font-weight: 600; font-size: .85rem;
+  transition: var(--transizione); display: inline-flex; align-items: center; gap: 6px;
+}
+.filtri-categoria button:hover { color: var(--testo); border-color: var(--bordo-chiaro); }
+.filtri-categoria button.attivo { color: #fff; background: var(--gradiente); border-color: transparent;
+  box-shadow: 0 4px 14px rgba(124,92,255,.35); }
+
+/* Griglia esempi: 3 colonne desktop · 2 tablet · 1 mobile */
+.griglia-esempi { display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 900px) { .griglia-esempi { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 580px) { .griglia-esempi { grid-template-columns: 1fr; } }
+
+.card-esempio {
+  background: var(--pannello); border: 1px solid var(--bordo);
+  border-radius: var(--raggio-lg); padding: 18px;
+  display: flex; flex-direction: column; gap: 12px;
+  transition: var(--transizione);
+}
+.card-esempio:hover { border-color: var(--bordo-chiaro); transform: translateY(-2px); box-shadow: var(--ombra-soft); }
+.card-esempio .intestazione { display: flex; align-items: center; gap: 12px; }
+.card-esempio .num-cerchio {
+  flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%;
+  background: var(--gradiente); color: #fff; font-weight: 800; font-size: .9rem;
+  display: grid; place-items: center; box-shadow: 0 4px 14px rgba(124,92,255,.35);
+}
+.card-esempio .titolo-esempio { font-weight: 700; font-size: .98rem; line-height: 1.25; }
+.card-esempio .preview-prompt { font-size: .85rem; color: var(--testo-soft); line-height: 1.5; flex: 1; }
+.card-esempio .btn { width: 100%; }
+
+/* c) FAQ accordion */
+.faq-lista { display: grid; gap: 10px; margin-top: 18px; max-width: 760px; }
+.faq-item { border: 1px solid var(--bordo); border-radius: var(--raggio);
+  background: var(--pannello); overflow: hidden; }
+.faq-domanda {
+  width: 100%; text-align: left; background: transparent; border: none;
+  color: var(--testo); font-weight: 600; font-size: .95rem;
+  padding: 15px 18px; cursor: pointer;
+  display: flex; justify-content: space-between; gap: 12px; align-items: center;
+  transition: var(--transizione);
+}
+.faq-domanda:hover { background: var(--pannello-2); }
+.faq-domanda .freccia { transition: var(--transizione); color: var(--testo-debole); }
+.faq-domanda.aperta .freccia { transform: rotate(180deg); }
+.faq-risposta { padding: 0 18px 16px; font-size: .9rem; color: var(--testo-soft); }
+
+/* Flash di evidenziazione della textarea quando si precompila un prompt */
+@keyframes flashEvidenzia {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(124,92,255,0); border-color: var(--bordo); }
+  30%      { box-shadow: 0 0 0 4px rgba(124,92,255,.45); border-color: var(--accento); }
+}
+.flash-evidenzia { animation: flashEvidenzia 1.4s ease; }
+
 /* ---- Footer ------------------------------------------------------------- */
 .pie {
   text-align: center; padding: 24px; color: var(--testo-debole); font-size: .82rem;

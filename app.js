@@ -9,7 +9,18 @@ import { PROVIDER, leggiConfig, salvaConfig, configDefault } from './lib/llm.js'
 import { generaApp, assemblaAnteprima } from './lib/generator.js';
 import { esportaZip } from './lib/exporter.js';
 import { TEMPLATES, templatePerId } from './lib/templates.js';
+import { ESEMPI as PROMPT_ESEMPI, CATEGORIE as CATEGORIE_ESEMPI } from './lib/esempi.js';
 import { salvaApp, elencoApp, eliminaApp, svuotaCronologia } from './lib/storage.js';
+
+// Domande frequenti mostrate nella schermata "Esempi".
+const FAQ = [
+  { d: 'Quale provider conviene per iniziare?', r: 'Groq, gratis e velocissimo. Crea una chiave su console.groq.com/keys (no carta richiesta).' },
+  { d: 'Quanto mi costa usare AppToApp?', r: 'Zero. Sempre. La chiave API che usi è gratuita dai provider supportati.' },
+  { d: 'Posso vendere le app che genero?', r: 'Sì, sono completamente tue. Licenza MIT su tutto il codice generato.' },
+  { d: 'Le app funzionano offline?', r: 'Sì. Dopo aver esportato lo zip, l\'app gira aprendo index.html senza internet.' },
+  { d: 'Cosa succede se l\'output ha bug?', r: 'Premi Rigenera, oppure scrivi un prompt più dettagliato. Vedi i suggerimenti in fondo.' },
+  { d: 'Posso modificare il codice generato?', r: 'Certo. Apri i file nel tuo editor preferito (VS Code, Sublime, anche TextEdit).' }
+];
 
 const URL_ALPINE = 'https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js';
 const FLAG_ONBOARDING = 'apptoapp:onboarding-visto';
@@ -52,6 +63,15 @@ function creaApp() {
     /* ---- Stato: cronologia ---- */
     cronologia: [],
 
+    /* ---- Stato: schermata Esempi ---- */
+    esempiPrompt: PROMPT_ESEMPI,
+    categorieEsempi: CATEGORIE_ESEMPI,
+    categoriaEsempi: 'tutti',
+    faq: FAQ,
+    guidaAperta: null,        // id della card "Come usare" con accordion aperto
+    faqAperta: null,          // indice della FAQ aperta
+    promptEvidenziato: false, // flash della textarea dopo "Usa questo prompt"
+
     /* ---- Avvio ---- */
     init() {
       // Mostra l'onboarding solo se non c'è una chiave e non è già stato visto.
@@ -83,6 +103,43 @@ function creaApp() {
     selezionaTemplate(id) {
       this.templateSelezionato = id;
       console.log('[AppToApp] Template cliccato:', id, 'Stato dopo click:', this.templateSelezionato);
+    },
+
+    /* ---- Schermata Esempi ---- */
+    // Esempi visibili in base alla categoria selezionata ("tutti" non filtra).
+    esempiFiltrati() {
+      if (this.categoriaEsempi === 'tutti') return this.esempiPrompt;
+      return this.esempiPrompt.filter((e) => e.categoria === this.categoriaEsempi);
+    },
+    filtraEsempi(cat) { this.categoriaEsempi = cat; },
+
+    // Accordion: una sola card "Come usare" aperta per volta; idem per le FAQ.
+    togglaGuida(id) { this.guidaAperta = this.guidaAperta === id ? null : id; },
+    togglaFaq(i) { this.faqAperta = this.faqAperta === i ? null : i; },
+
+    // Preview di 2 righe del prompt per la card (testo compatto, con ellissi).
+    anteprimaPrompt(testo, righe = 2) {
+      const linee = String(testo || '').split('\n').map((l) => l.trim()).filter(Boolean);
+      let estratto = linee.slice(0, righe).join(' ');
+      if (estratto.length > 130) estratto = estratto.slice(0, 130).trimEnd();
+      return estratto + (linee.length > righe || estratto.length >= 130 ? '…' : '');
+    },
+
+    // "Usa questo prompt": va su Genera, imposta AI libera, precompila il campo
+    // e lo evidenzia (scroll + focus + flash). NON avvia la generazione.
+    usaPrompt(testo) {
+      this.templateSelezionato = 'ai-libera';
+      this.prompt = testo;
+      this.vai('genera');
+      this.$nextTick(() => {
+        const ta = document.getElementById('prompt');
+        if (!ta) return;
+        ta.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        ta.focus();
+        ta.setSelectionRange(ta.value.length, ta.value.length);
+        this.promptEvidenziato = true;
+        setTimeout(() => { this.promptEvidenziato = false; }, 1500);
+      });
     },
 
     /* ---- Generazione ---- */

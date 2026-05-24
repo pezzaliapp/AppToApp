@@ -37,6 +37,10 @@
               :aria-current="schermata==='genera' ? 'page' : false">
         <span aria-hidden="true">✨</span> Genera
       </button>
+      <button :class="{ attivo: schermata==='esempi' }" @click="vai('esempi')"
+              :aria-current="schermata==='esempi' ? 'page' : false">
+        <span aria-hidden="true">💡</span> Esempi
+      </button>
       <button :class="{ attivo: schermata==='cronologia' }" @click="vai('cronologia')"
               :aria-current="schermata==='cronologia' ? 'page' : false">
         <span aria-hidden="true">🕘</span> Cronologia
@@ -66,7 +70,7 @@
 
       <div class="card spazia">
         <label class="etichetta" for="prompt">Descrivi l'app che vuoi creare</label>
-        <textarea id="prompt" class="prompt-grande" x-model="prompt"
+        <textarea id="prompt" class="prompt-grande" :class="{ 'flash-evidenzia': promptEvidenziato }" x-model="prompt"
           placeholder="Es: una calcolatrice per percentuali e sconti, con tema scuro e tasti grandi"></textarea>
 
         <div class="spazia-sm">
@@ -246,6 +250,100 @@
       </div>
     </section>
 
+    <!-- ====================== SCHERMATA: ESEMPI ====================== -->
+    <section x-show="schermata==='esempi'">
+      <h1 class="titolo-grande">Esempi e <span class="evidenza">come si usa</span></h1>
+      <p class="sottotitolo">Parti da uno dei 30 prompt testati, oppure scopri come provare, esportare e pubblicare le tue app.</p>
+
+      <!-- a) Come usare AppToApp -->
+      <h2 class="sezione-titolo spazia">Come usare AppToApp</h2>
+      <div class="esempi-intro">
+
+        <div class="card-uso">
+          <span class="titoletto"><span aria-hidden="true">👀</span> Prova l'anteprima</span>
+          <span class="descr-uso">Genera un'app e usala subito nell'anteprima live: è interattiva, clicca e digita come nell'app vera.</span>
+          <button class="accordion-toggle" @click="togglaGuida('anteprima')" :aria-expanded="guidaAperta==='anteprima'"
+                  x-text="guidaAperta==='anteprima' ? 'Nascondi passi' : 'Mostra passi'"></button>
+          <div class="accordion-corpo" x-show="guidaAperta==='anteprima'" x-transition>
+            <ol>
+              <li>Scrivi la descrizione e premi <strong>✨ Genera app</strong>.</li>
+              <li>L'anteprima compare nel riquadro a sinistra, dentro un iframe sicuro.</li>
+              <li>Interagisci con l'app. Non ti convince? Premi <strong>🔄 Rigenera</strong>.</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="card-uso">
+          <span class="titoletto"><span aria-hidden="true">📦</span> Esporta come .zip</span>
+          <span class="descr-uso">Scarica l'app come archivio standalone: funziona aprendo <code>index.html</code>, anche offline e senza internet.</span>
+          <button class="accordion-toggle" @click="togglaGuida('export')" :aria-expanded="guidaAperta==='export'"
+                  x-text="guidaAperta==='export' ? 'Nascondi passi' : 'Mostra passi'"></button>
+          <div class="accordion-corpo" x-show="guidaAperta==='export'" x-transition>
+            <ol>
+              <li>Premi <strong>📦 Esporta .zip</strong> e salva il file.</li>
+              <li>Apri lo zip (doppio click) ed estrai la cartella.</li>
+              <li>Doppio click su <code>index.html</code>: l'app si apre nel browser e funziona offline.</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="card-uso">
+          <span class="titoletto"><span aria-hidden="true">🚀</span> Pubblica su GitHub Pages</span>
+          <span class="descr-uso">Metti la tua app online gratis e condividi il link con chiunque, senza scadenza.</span>
+          <button class="accordion-toggle" @click="togglaGuida('pubblica')" :aria-expanded="guidaAperta==='pubblica'"
+                  x-text="guidaAperta==='pubblica' ? 'Nascondi passi' : 'Mostra passi'"></button>
+          <div class="accordion-corpo" x-show="guidaAperta==='pubblica'" x-transition>
+            <ol>
+              <li>Esporta lo zip ed estrai i file.</li>
+              <li>Crea una repository su <a href="https://github.com/new" target="_blank" rel="noopener">GitHub</a> e carica i file.</li>
+              <li><strong>Settings → Pages → branch main → root → Save</strong>. Online in 1-2 minuti.</li>
+            </ol>
+            <p class="testo-debole">Apri <strong>🚀 Pubblica</strong> su un'app generata per la guida passo-passo.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- b) 30 esempi pronti -->
+      <h2 class="sezione-titolo spazia">30 esempi pronti</h2>
+      <div class="filtri-categoria" role="tablist" aria-label="Filtra per categoria">
+        <template x-for="c in categorieEsempi" :key="c.id">
+          <button type="button" :class="{ attivo: categoriaEsempi===c.id }" @click="filtraEsempi(c.id)"
+                  :aria-pressed="categoriaEsempi===c.id">
+            <span aria-hidden="true" x-text="c.icona"></span> <span x-text="c.nome"></span>
+          </button>
+        </template>
+      </div>
+
+      <div class="griglia-esempi">
+        <template x-for="es in esempiFiltrati()" :key="es.id">
+          <article class="card-esempio">
+            <div class="intestazione">
+              <span class="num-cerchio" x-text="es.numero"></span>
+              <span class="titolo-esempio" x-text="es.titolo"></span>
+            </div>
+            <p class="preview-prompt" x-text="anteprimaPrompt(es.prompt)"></p>
+            <button class="btn btn-primario" @click="usaPrompt(es.prompt)">✨ Usa questo prompt</button>
+          </article>
+        </template>
+      </div>
+
+      <!-- c) FAQ -->
+      <h2 class="sezione-titolo spazia">Domande frequenti</h2>
+      <div class="faq-lista">
+        <template x-for="(item, i) in faq" :key="i">
+          <div class="faq-item">
+            <button class="faq-domanda" :class="{ aperta: faqAperta===i }" @click="togglaFaq(i)"
+                    :aria-expanded="faqAperta===i">
+              <span x-text="item.d"></span>
+              <span class="freccia" aria-hidden="true">▾</span>
+            </button>
+            <div class="faq-risposta" x-show="faqAperta===i" x-transition x-text="item.r"></div>
+          </div>
+        </template>
+      </div>
+    </section>
+
   </main>
 
   <footer class="pie">
@@ -285,14 +383,20 @@
     <div class="overlay" @click.self="guidaPagesVisibile=false">
       <div class="modale" role="dialog" aria-modal="true" aria-labelledby="gp-titolo">
         <h2 id="gp-titolo">🚀 Pubblica su GitHub Pages (gratis)</h2>
-        <p class="testo-soft">L'app si pubblica online senza costi in pochi passi:</p>
+        <p class="testo-soft">Metti la tua app online gratis, in 6 passi, senza scadenza:</p>
         <div class="passi">
-          <div class="passo"><span class="num">1</span><span class="testo">Premi <strong>📦 Esporta .zip</strong> e scompatta l'archivio.</span></div>
-          <div class="passo"><span class="num">2</span><span class="testo">Crea un repository su <a href="https://github.com/new" target="_blank" rel="noopener">GitHub</a> e carica i file (anche via drag &amp; drop).</span></div>
-          <div class="passo"><span class="num">3</span><span class="testo">Vai in <strong>Settings → Pages</strong>, scegli branch <strong>main</strong> e cartella <strong>/(root)</strong>, poi <strong>Save</strong>.</span></div>
-          <div class="passo"><span class="num">4</span><span class="testo">Dopo qualche minuto l'app sarà online su <code>https://&lt;utente&gt;.github.io/&lt;repo&gt;/</code></span></div>
+          <div class="passo"><span class="num">1</span><span class="testo"><strong>Scarica i file:</strong> premi prima <strong>📦 Esporta .zip</strong> e estrai la cartella.</span></div>
+          <div class="passo"><span class="num">2</span><span class="testo"><strong>Crea l'account GitHub:</strong> vai su <a href="https://github.com/signup" target="_blank" rel="noopener">github.com/signup</a> se non ne hai uno (è gratis).</span></div>
+          <div class="passo"><span class="num">3</span><span class="testo"><strong>Nuova repository:</strong> click <strong>'+'</strong> in alto a destra → <strong>'New repository'</strong>. Dai un nome (es: <code>mia-app</code>). Lascia <strong>'Public'</strong>. Niente README. Premi <strong>'Create repository'</strong>.</span></div>
+          <div class="passo"><span class="num">4</span><span class="testo"><strong>Carica i file:</strong> sulla pagina della repo nuova, click <strong>'uploading an existing file'</strong>. Trascina tutti i file della cartella estratta. Scrivi un messaggio (es: <em>prima versione</em>) e premi <strong>'Commit changes'</strong>.</span></div>
+          <div class="passo"><span class="num">5</span><span class="testo"><strong>Attiva GitHub Pages:</strong> <strong>Settings → Pages → Source: Deploy from branch → Branch: main, root → Save</strong>.</span></div>
+          <div class="passo"><span class="num">6</span><span class="testo"><strong>Aspetta 1-2 minuti:</strong> torna su <strong>Settings → Pages</strong>: vedrai l'URL pubblico della tua app, tipo <code>https://tuonome.github.io/mia-app/</code>. Condividi quel link con chiunque.</span></div>
         </div>
-        <div class="riga riga-fine">
+        <div class="avviso avviso-privacy spazia-sm">
+          <span class="icona" aria-hidden="true">🔒</span>
+          <div>Importante: nessuno potrà vedere la tua chiave API delle Impostazioni di AppToApp, perché quella resta nel tuo browser. La tua app pubblicata è completamente standalone.</div>
+        </div>
+        <div class="riga riga-fine spazia">
           <button class="btn btn-ghost" @click="guidaPagesVisibile=false">Chiudi</button>
           <button class="btn btn-primario" @click="esporta(); guidaPagesVisibile=false">📦 Esporta ora</button>
         </div>
