@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#7c5cff">
+<title>Cose da fare</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237c5cff'/%3E%3Ctext x='32' y='44' font-size='34' font-weight='700' fill='white' text-anchor='middle' font-family='system-ui'%3E✅%3C/text%3E%3C/svg%3E">
+<style>
+  :root { color-scheme: dark; --bg:#0a0a0f; --pan:#16161f; --bordo:#262633; --txt:#ededf2; --soft:#a0a0b0; --acc:#7c5cff; --ok:#2ecc71; }
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--txt);
+    min-height: 100dvh; display: flex; justify-content: center; padding: 24px 16px; }
+  .app { width: min(560px, 100%); }
+  header { margin-bottom: 20px; }
+  h1 { font-size: 1.8rem; letter-spacing: -.02em; }
+  .conta { color: var(--soft); font-size: .9rem; margin-top: 4px; }
+  form { display: flex; gap: 10px; margin-bottom: 18px; }
+  input[type=text] { flex: 1; background: var(--pan); border: 1px solid var(--bordo);
+    border-radius: 12px; color: var(--txt); padding: 14px; font: inherit; }
+  input:focus { outline: none; border-color: var(--acc); box-shadow: 0 0 0 3px rgba(124,92,255,.2); }
+  .aggiungi { background: linear-gradient(135deg,#7c5cff,#4d7cff); color: #fff; border: none;
+    border-radius: 12px; padding: 0 20px; font: inherit; font-weight: 700; cursor: pointer; }
+  ul { list-style: none; display: grid; gap: 8px; }
+  li { display: flex; align-items: center; gap: 12px; background: var(--pan);
+    border: 1px solid var(--bordo); border-radius: 12px; padding: 14px; transition: opacity .2s; }
+  li.fatta .testo { text-decoration: line-through; color: var(--soft); }
+  .spunta { width: 22px; height: 22px; border-radius: 7px; border: 2px solid var(--bordo);
+    cursor: pointer; flex-shrink: 0; display: grid; place-items: center; background: transparent; transition: .15s; }
+  .spunta[aria-pressed=true] { background: var(--ok); border-color: var(--ok); }
+  .spunta svg { opacity: 0; }
+  .spunta[aria-pressed=true] svg { opacity: 1; }
+  .testo { flex: 1; word-break: break-word; }
+  .elimina { background: none; border: none; color: var(--soft); cursor: pointer; font-size: 1.2rem;
+    border-radius: 8px; padding: 4px 8px; }
+  .elimina:hover { color: #ff5c6c; }
+  .vuoto { text-align: center; color: var(--soft); padding: 40px 0; }
+  button:focus-visible, .spunta:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }
+</style>
+</head>
+<body>
+  <main class="app">
+    <header>
+      <h1>Cose da fare</h1>
+      <p class="conta" id="conta" aria-live="polite"></p>
+    </header>
+    <form id="form">
+      <input type="text" id="campo" placeholder="Aggiungi un'attività…" autocomplete="off" aria-label="Nuova attività">
+      <button class="aggiungi" type="submit">Aggiungi</button>
+    </form>
+    <ul id="lista" aria-label="Elenco attività"></ul>
+    <p class="vuoto" id="vuoto">Nessuna attività. Aggiungine una! 🎯</p>
+  </main>
+
+<script>
+  const CHIAVE = 'todo:attivita';
+  let attivita = caricare();
+  const lista = document.getElementById('lista');
+  const conta = document.getElementById('conta');
+  const vuoto = document.getElementById('vuoto');
+
+  function caricare() {
+    try { return JSON.parse(localStorage.getItem(CHIAVE)) || []; } catch { return []; }
+  }
+  function salvare() { localStorage.setItem(CHIAVE, JSON.stringify(attivita)); }
+
+  function disegna() {
+    lista.innerHTML = '';
+    attivita.forEach((a) => {
+      const li = document.createElement('li');
+      if (a.fatta) li.classList.add('fatta');
+      li.innerHTML = `
+        <button class="spunta" aria-pressed="${a.fatta}" aria-label="Segna come completata">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+        </button>
+        <span class="testo"></span>
+        <button class="elimina" aria-label="Elimina attività">×</button>`;
+      li.querySelector('.testo').textContent = a.testo;
+      li.querySelector('.spunta').addEventListener('click', () => { a.fatta = !a.fatta; salvare(); disegna(); });
+      li.querySelector('.elimina').addEventListener('click', () => { attivita = attivita.filter((x) => x !== a); salvare(); disegna(); });
+      lista.appendChild(li);
+    });
+    const rimaste = attivita.filter((a) => !a.fatta).length;
+    conta.textContent = attivita.length ? `${rimaste} da completare · ${attivita.length} totali` : '';
+    vuoto.style.display = attivita.length ? 'none' : 'block';
+  }
+
+  document.getElementById('form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const campo = document.getElementById('campo');
+    const testo = campo.value.trim();
+    if (!testo) return;
+    attivita.unshift({ testo, fatta: false });
+    campo.value = '';
+    salvare(); disegna();
+  });
+
+  disegna();
+</script>
+</body>
+</html>
