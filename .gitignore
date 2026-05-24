@@ -1,0 +1,18 @@
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Dipendenze (non usiamo npm, ma per sicurezza)
+node_modules/
+
+# Variabili d'ambiente e segreti (le chiavi API NON vanno mai nel repo)
+.env
+.env.*
+*.key
+
+# Log
+*.log
+
+# Cartelle temporanee
+.cache/
+tmp/
