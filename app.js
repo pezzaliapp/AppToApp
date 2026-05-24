@@ -76,8 +76,18 @@ function creaApp() {
     },
     apriGuidaPages() { this.guidaPagesVisibile = true; },
 
+    /* ---- Template di partenza ---- */
+    // Unico punto che scrive lo stato del template selezionato: lo stesso nome
+    // (templateSelezionato) è dichiarato nello stato iniziale, letto da :class
+    // per evidenziare il riquadro e da genera()/generaApp() per arricchire il prompt.
+    selezionaTemplate(id) {
+      this.templateSelezionato = id;
+      console.log('[AppToApp] Template cliccato:', id, 'Stato dopo click:', this.templateSelezionato);
+    },
+
     /* ---- Generazione ---- */
     async genera() {
+      console.log('[AppToApp] Generazione avviata. Template attivo:', this.templateSelezionato);
       const richiesta = this.prompt.trim();
       if (!richiesta) return;
 

@@ -4,7 +4,7 @@
    Le chiamate alle API LLM NON vengono mai intercettate né messe in cache.
    ========================================================================== */
 
-const VERSIONE = 'apptoapp-v1';
+const VERSIONE = 'apptoapp-v2';
 
 // Risorse statiche che compongono la "shell" dell'app.
 const RISORSE_SHELL = [
