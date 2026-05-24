@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Dashboard vendite: KPI, andamento mensile e ordini recenti.">
+<meta name="theme-color" content="#7c5cff">
+<title>Dashboard Vendite</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237c5cff'/%3E%3Ctext x='32' y='44' font-size='34' font-weight='700' fill='white' text-anchor='middle' font-family='system-ui'%3E📊%3C/text%3E%3C/svg%3E">
+<style>
+  :root { color-scheme: dark; --bg:#0a0a0f; --pan:#16161f; --pan2:#1c1c28; --bordo:#262633;
+    --txt:#ededf2; --soft:#a0a0b0; --debole:#6b6b80; --acc:#7c5cff; --acc2:#4d7cff;
+    --ok:#2ecc71; --err:#ff5c6c; --grad:linear-gradient(135deg,#7c5cff,#4d7cff); }
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--txt); line-height: 1.5; }
+  .wrap { width: min(1120px, 94%); margin: 0 auto; padding: 28px 0 60px; }
+  :focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; border-radius: 6px; }
+
+  header.top { display: flex; align-items: center; gap: 14px; margin-bottom: 26px; flex-wrap: wrap; }
+  .logo { width: 40px; height: 40px; border-radius: 11px; background: var(--grad); display: grid; place-items: center; font-size: 1.3rem; }
+  header.top h1 { font-size: 1.5rem; letter-spacing: -.02em; }
+  header.top .sub { color: var(--soft); font-size: .9rem; }
+  header.top .periodo { margin-left: auto; background: var(--pan); border: 1px solid var(--bordo);
+    color: var(--txt); border-radius: 11px; padding: 10px 14px; font: inherit; }
+
+  .kpi { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 22px; }
+  .scheda { background: var(--pan); border: 1px solid var(--bordo); border-radius: 16px; padding: 20px; }
+  .scheda .et { color: var(--soft); font-size: .85rem; display: flex; align-items: center; gap: 8px; }
+  .scheda .val { font-size: 1.9rem; font-weight: 800; letter-spacing: -.02em; margin: 8px 0 4px; }
+  .trend { font-size: .82rem; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 999px; }
+  .su { color: var(--ok); background: rgba(46,204,113,.12); }
+  .giu { color: var(--err); background: rgba(255,92,108,.12); }
+
+  .riquadri { display: grid; gap: 16px; grid-template-columns: 1fr; }
+  @media (min-width: 900px) { .riquadri { grid-template-columns: 1.5fr 1fr; } }
+  .pannello { background: var(--pan); border: 1px solid var(--bordo); border-radius: 16px; padding: 20px; }
+  .pannello h2 { font-size: 1.05rem; margin-bottom: 4px; }
+  .pannello .nota { color: var(--soft); font-size: .85rem; margin-bottom: 16px; }
+  .chart-box { position: relative; height: 300px; }
+  #fallback { display: none; color: var(--soft); text-align: center; padding: 40px 0; }
+
+  .canali { display: grid; gap: 12px; }
+  .canale { display: grid; grid-template-columns: 90px 1fr auto; gap: 12px; align-items: center; font-size: .9rem; }
+  .barra { height: 10px; border-radius: 999px; background: var(--pan2); overflow: hidden; }
+  .barra > span { display: block; height: 100%; background: var(--grad); }
+
+  .pannello.tabella { margin-top: 16px; }
+  table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+  th, td { text-align: left; padding: 12px 10px; border-bottom: 1px solid var(--bordo); }
+  th { color: var(--soft); font-weight: 600; font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .stato { font-size: .78rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
+  .s-pagato { color: var(--ok); background: rgba(46,204,113,.12); }
+  .s-attesa { color: #f5a623; background: rgba(245,166,35,.12); }
+  .s-rimborso { color: var(--err); background: rgba(255,92,108,.12); }
+  .tabella .scroll { overflow-x: auto; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <span class="logo" aria-hidden="true">📊</span>
+      <div>
+        <h1>Dashboard Vendite</h1>
+        <div class="sub">Panoramica · ultimi 6 mesi</div>
+      </div>
+      <select class="periodo" id="periodo" aria-label="Periodo">
+        <option>Ultimi 6 mesi</option>
+        <option>Ultimo trimestre</option>
+        <option>Anno in corso</option>
+      </select>
+    </header>
+
+    <!-- KPI -->
+    <section class="kpi" aria-label="Indicatori chiave">
+      <div class="scheda"><div class="et">💶 Fatturato</div><div class="val">€ 128.400</div><span class="trend su">▲ 12,4%</span></div>
+      <div class="scheda"><div class="et">🧾 Ordini</div><div class="val">1.846</div><span class="trend su">▲ 8,1%</span></div>
+      <div class="scheda"><div class="et">👥 Nuovi clienti</div><div class="val">312</div><span class="trend su">▲ 5,3%</span></div>
+      <div class="scheda"><div class="et">📉 Tasso abbandono</div><div class="val">2,7%</div><span class="trend giu">▼ 0,4%</span></div>
+    </section>
+
+    <div class="riquadri">
+      <!-- Grafico -->
+      <div class="pannello">
+        <h2>Andamento del fatturato</h2>
+        <p class="nota">Ricavi mensili (€)</p>
+        <div class="chart-box">
+          <canvas id="grafico" aria-label="Grafico del fatturato mensile" role="img"></canvas>
+          <p id="fallback">Il grafico richiede una connessione per caricare Chart.js dal CDN.</p>
+        </div>
+      </div>
+
+      <!-- Canali -->
+      <div class="pannello">
+        <h2>Vendite per canale</h2>
+        <p class="nota">Quota sul totale</p>
+        <div class="canali" id="canali"></div>
+      </div>
+    </div>
+
+    <!-- Tabella -->
+    <div class="pannello tabella">
+      <h2>Ordini recenti</h2>
+      <p class="nota">Ultime transazioni registrate</p>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Ordine</th><th>Cliente</th><th>Data</th><th>Stato</th><th class="num">Importo</th></tr></thead>
+          <tbody id="righe"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart.js da CDN (con fallback se non disponibile) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script>
+    // --- Dati di esempio ---
+    const mesi = ['Dic', 'Gen', 'Feb', 'Mar', 'Apr', 'Mag'];
+    const ricavi = [16800, 18200, 19500, 21000, 24300, 28600];
+
+    const canali = [
+      { nome: 'Sito web', perc: 46 },
+      { nome: 'Marketplace', perc: 28 },
+      { nome: 'Negozio', perc: 18 },
+      { nome: 'Social', perc: 8 }
+    ];
+
+    const ordini = [
+      ['#10492', 'Bianchi S.r.l.', '23 mag', 'pagato', 1240],
+      ['#10491', 'Rossi Marco', '23 mag', 'attesa', 89],
+      ['#10488', 'Verdi Lucia', '22 mag', 'pagato', 320],
+      ['#10485', 'Officine Po', '22 mag', 'pagato', 2150],
+      ['#10481', 'Neri Giulia', '21 mag', 'rimborso', 64],
+      ['#10478', 'Galli & C.', '21 mag', 'pagato', 540]
+    ];
+
+    const euro = (n) => '€ ' + n.toLocaleString('it-IT');
+
+    // --- Canali (barre disegnate in CSS) ---
+    document.getElementById('canali').innerHTML = canali.map((c) => `
+      <div class="canale">
+        <span>${c.nome}</span>
+        <span class="barra"><span style="width:${c.perc}%"></span></span>
+        <strong>${c.perc}%</strong>
+      </div>`).join('');
+
+    // --- Tabella ordini ---
+    const etichetteStato = { pagato: ['Pagato', 's-pagato'], attesa: ['In attesa', 's-attesa'], rimborso: ['Rimborso', 's-rimborso'] };
+    document.getElementById('righe').innerHTML = ordini.map(([id, cli, data, st, imp]) => {
+      const [testo, cls] = etichetteStato[st];
+      return `<tr><td>${id}</td><td>${cli}</td><td>${data}</td>
+        <td><span class="stato ${cls}">${testo}</span></td>
+        <td class="num">${euro(imp)}</td></tr>`;
+    }).join('');
+
+    // --- Grafico Chart.js (con fallback) ---
+    if (window.Chart) {
+      const ctx = document.getElementById('grafico');
+      const g = ctx.getContext('2d').createLinearGradient(0, 0, 0, 300);
+      g.addColorStop(0, 'rgba(124,92,255,.45)');
+      g.addColorStop(1, 'rgba(124,92,255,0)');
+      new Chart(ctx, {
+        type: 'line',
+        data: { labels: mesi, datasets: [{
+          data: ricavi, label: 'Fatturato', borderColor: '#7c5cff', backgroundColor: g,
+          fill: true, tension: .38, borderWidth: 3, pointBackgroundColor: '#4d7cff',
+          pointRadius: 4, pointHoverRadius: 6
+        }] },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => euro(c.parsed.y) } } },
+          scales: {
+            x: { grid: { color: 'rgba(255,255,255,.05)' }, ticks: { color: '#a0a0b0' } },
+            y: { grid: { color: 'rgba(255,255,255,.05)' }, ticks: { color: '#a0a0b0', callback: (v) => '€' + (v / 1000) + 'k' } }
+          }
+        }
+      });
+    } else {
+      document.getElementById('grafico').style.display = 'none';
+      document.getElementById('fallback').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

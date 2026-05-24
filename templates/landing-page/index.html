@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Officina AutoPro: tagliandi, diagnosi elettronica, gomme e revisioni. Prenota online.">
+<meta name="theme-color" content="#7c5cff">
+<title>Officina AutoPro · meccanica di fiducia</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237c5cff'/%3E%3Ctext x='32' y='44' font-size='34' font-weight='700' fill='white' text-anchor='middle' font-family='system-ui'%3E🔧%3C/text%3E%3C/svg%3E">
+<style>
+  :root { color-scheme: dark; --bg:#0a0a0f; --bg2:#111118; --pan:#16161f; --bordo:#262633;
+    --txt:#ededf2; --soft:#a0a0b0; --acc:#7c5cff; --acc2:#4d7cff; --ok:#2ecc71;
+    --grad:linear-gradient(135deg,#7c5cff,#4d7cff); }
+  * { box-sizing: border-box; margin: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--txt); line-height: 1.6; }
+  body::before { content:""; position: fixed; inset: 0; z-index:-1; pointer-events:none;
+    background: radial-gradient(60vw 50vh at 20% -10%, rgba(124,92,255,.18), transparent 60%),
+                radial-gradient(50vw 40vh at 100% 0, rgba(77,124,255,.14), transparent 55%); }
+  a { color: inherit; text-decoration: none; }
+  img, svg { display: block; max-width: 100%; }
+  :focus-visible { outline: 2px solid var(--acc); outline-offset: 3px; border-radius: 6px; }
+  .wrap { width: min(1080px, 92%); margin: 0 auto; }
+
+  /* Nav */
+  header.nav { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(12px);
+    background: rgba(10,10,15,.7); border-bottom: 1px solid var(--bordo); }
+  .nav .wrap { display: flex; align-items: center; gap: 16px; padding: 14px 0; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: -.02em; }
+  .logo .b { width: 34px; height: 34px; border-radius: 9px; background: var(--grad);
+    display: grid; place-items: center; font-size: 1.1rem; }
+  nav.menu { margin-left: auto; display: flex; gap: 6px; }
+  nav.menu a { padding: 8px 14px; border-radius: 9px; color: var(--soft); font-weight: 600; font-size: .92rem; }
+  nav.menu a:hover { color: var(--txt); background: var(--pan); }
+  .btn { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--bordo);
+    background: var(--pan); color: var(--txt); padding: 12px 20px; border-radius: 12px;
+    font-weight: 700; cursor: pointer; font: inherit; font-weight: 700; transition: .15s; }
+  .btn:hover { transform: translateY(-1px); border-color: var(--acc); }
+  .btn-primario { background: var(--grad); border: none; color: #fff; box-shadow: 0 6px 20px rgba(124,92,255,.4); }
+  .nav .btn { padding: 9px 16px; }
+
+  /* Hero */
+  .hero { padding: 80px 0 60px; text-align: center; }
+  .pill { display: inline-flex; gap: 8px; align-items: center; font-size: .82rem; font-weight: 700;
+    padding: 6px 14px; border-radius: 999px; background: rgba(124,92,255,.14);
+    border: 1px solid rgba(124,92,255,.4); color: #c9b9ff; margin-bottom: 22px; }
+  .hero h1 { font-size: clamp(2.2rem, 6vw, 3.6rem); font-weight: 800; letter-spacing: -.03em; line-height: 1.05; }
+  .hero h1 .g { background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero p { color: var(--soft); font-size: 1.15rem; max-width: 56ch; margin: 18px auto 30px; }
+  .hero .cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .stat-bar { display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; margin-top: 50px; color: var(--soft); }
+  .stat-bar b { display: block; font-size: 1.8rem; color: var(--txt); font-weight: 800; letter-spacing: -.02em; }
+
+  /* Sezioni */
+  section { padding: 60px 0; }
+  .titolo-sez { text-align: center; margin-bottom: 40px; }
+  .titolo-sez h2 { font-size: clamp(1.6rem, 4vw, 2.3rem); font-weight: 800; letter-spacing: -.02em; }
+  .titolo-sez p { color: var(--soft); margin-top: 8px; }
+
+  .servizi { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .card { background: var(--pan); border: 1px solid var(--bordo); border-radius: 18px; padding: 26px; transition: .2s; }
+  .card:hover { transform: translateY(-4px); border-color: var(--acc); }
+  .card .ico { width: 50px; height: 50px; border-radius: 13px; background: rgba(124,92,255,.14);
+    display: grid; place-items: center; font-size: 1.5rem; margin-bottom: 16px; }
+  .card h3 { font-size: 1.15rem; margin-bottom: 8px; }
+  .card p { color: var(--soft); font-size: .95rem; }
+  .card .prezzo { margin-top: 14px; font-weight: 800; color: #c9b9ff; }
+
+  .vantaggi { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .vantaggio { display: flex; gap: 14px; align-items: flex-start; }
+  .vantaggio .v { flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: rgba(46,204,113,.18);
+    color: var(--ok); display: grid; place-items: center; font-weight: 800; }
+
+  /* Form contatti */
+  .contatti { background: var(--bg2); border-top: 1px solid var(--bordo); border-bottom: 1px solid var(--bordo); }
+  .form-grid { display: grid; gap: 30px; grid-template-columns: 1fr; }
+  @media (min-width: 820px) { .form-grid { grid-template-columns: 1fr 1.2fr; align-items: start; } }
+  .info-contatto p { color: var(--soft); margin-bottom: 14px; display: flex; gap: 10px; align-items: center; }
+  form { background: var(--pan); border: 1px solid var(--bordo); border-radius: 18px; padding: 26px; }
+  label { display: block; font-size: .85rem; font-weight: 600; color: var(--soft); margin: 14px 0 6px; }
+  input, textarea, select { width: 100%; background: var(--bg); border: 1px solid var(--bordo);
+    border-radius: 11px; color: var(--txt); padding: 12px 14px; font: inherit; }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: var(--acc); box-shadow: 0 0 0 3px rgba(124,92,255,.2); }
+  textarea { resize: vertical; min-height: 90px; }
+  form .btn-primario { width: 100%; justify-content: center; margin-top: 22px; padding: 14px; }
+  .esito { margin-top: 16px; padding: 14px; border-radius: 11px; background: rgba(46,204,113,.12);
+    border: 1px solid rgba(46,204,113,.4); color: #b8f0ce; font-size: .92rem; display: none; }
+  .esito.mostra { display: block; }
+
+  footer.pie { padding: 30px 0; text-align: center; color: var(--soft); font-size: .88rem; }
+</style>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="wrap">
+      <a class="logo" href="#top"><span class="b">🔧</span> AutoPro</a>
+      <nav class="menu" aria-label="Sezioni">
+        <a href="#servizi">Servizi</a>
+        <a href="#perche">Perché noi</a>
+        <a href="#contatti">Contatti</a>
+      </nav>
+      <a class="btn btn-primario" href="#contatti">Prenota ora</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap">
+        <span class="pill">⭐ 4,9/5 · oltre 1.200 clienti soddisfatti</span>
+        <h1>La tua auto in <span class="g">mani esperte</span>,<br>senza sorprese.</h1>
+        <p>Tagliandi, diagnosi elettronica, gomme e revisioni. Preventivo chiaro prima di iniziare, consegna puntuale. Officina indipendente dal 1998.</p>
+        <div class="cta">
+          <a class="btn btn-primario" href="#contatti">📅 Prenota un intervento</a>
+          <a class="btn" href="#servizi">Scopri i servizi</a>
+        </div>
+        <div class="stat-bar">
+          <div><b>25+</b> anni di esperienza</div>
+          <div><b>48h</b> tempi medi di consegna</div>
+          <div><b>12</b> mesi di garanzia</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVIZI -->
+    <section id="servizi">
+      <div class="wrap">
+        <div class="titolo-sez">
+          <h2>I nostri servizi</h2>
+          <p>Tutto quello che serve alla tua auto, in un unico posto.</p>
+        </div>
+        <div class="servizi">
+          <article class="card"><div class="ico" aria-hidden="true">🛠️</div><h3>Tagliando completo</h3><p>Olio, filtri e controllo di 30 punti secondo le specifiche della casa.</p><div class="prezzo">da € 99</div></article>
+          <article class="card"><div class="ico" aria-hidden="true">💻</div><h3>Diagnosi elettronica</h3><p>Lettura centralina e ricerca guasti con strumenti multimarca.</p><div class="prezzo">da € 39</div></article>
+          <article class="card"><div class="ico" aria-hidden="true">🛞</div><h3>Gomme e assetto</h3><p>Montaggio, equilibratura e convergenza per ogni stagione.</p><div class="prezzo">da € 25</div></article>
+          <article class="card"><div class="ico" aria-hidden="true">📋</div><h3>Revisione</h3><p>Pratica completa e prenotazione presso centro autorizzato.</p><div class="prezzo">da € 66</div></article>
+          <article class="card"><div class="ico" aria-hidden="true">❄️</div><h3>Aria condizionata</h3><p>Ricarica gas, sanificazione impianto e sostituzione filtro abitacolo.</p><div class="prezzo">da € 49</div></article>
+          <article class="card"><div class="ico" aria-hidden="true">🔋</div><h3>Elettrauto</h3><p>Batterie, alternatori, impianti e sensori: diagnosi e sostituzione.</p><div class="prezzo">su preventivo</div></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PERCHÉ NOI -->
+    <section id="perche">
+      <div class="wrap">
+        <div class="titolo-sez"><h2>Perché sceglierci</h2></div>
+        <div class="vantaggi">
+          <div class="vantaggio"><span class="v">✓</span><div><strong>Preventivo trasparente</strong><br><span style="color:var(--soft)">Niente costi nascosti: sai sempre cosa paghi.</span></div></div>
+          <div class="vantaggio"><span class="v">✓</span><div><strong>Auto di cortesia</strong><br><span style="color:var(--soft)">Gratuita per gli interventi più lunghi.</span></div></div>
+          <div class="vantaggio"><span class="v">✓</span><div><strong>Ricambi garantiti</strong><br><span style="color:var(--soft)">Originali o equivalenti certificati, 12 mesi.</span></div></div>
+          <div class="vantaggio"><span class="v">✓</span><div><strong>Tutte le marche</strong><br><span style="color:var(--soft)">Mantieni la garanzia anche su auto nuove.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTATTI -->
+    <section id="contatti" class="contatti">
+      <div class="wrap">
+        <div class="titolo-sez"><h2>Prenota o richiedi un preventivo</h2><p>Ti rispondiamo entro un giorno lavorativo.</p></div>
+        <div class="form-grid">
+          <div class="info-contatto">
+            <p>📍 Via dei Meccanici 12, Milano</p>
+            <p>📞 02 1234 5678</p>
+            <p>✉️ info@autopro.example</p>
+            <p>🕗 Lun–Ven 8:00–18:30 · Sab 8:00–12:30</p>
+            <p style="margin-top:20px;color:var(--soft)">Compila il form: scegli il servizio e raccontaci di cosa hai bisogno. Nessun dato viene inviato a server esterni in questa demo.</p>
+          </div>
+          <form id="form" novalidate>
+            <label for="nome">Nome e cognome</label>
+            <input type="text" id="nome" name="nome" required autocomplete="name">
+            <label for="tel">Telefono</label>
+            <input type="tel" id="tel" name="tel" required autocomplete="tel" inputmode="tel">
+            <label for="servizio">Servizio richiesto</label>
+            <select id="servizio" name="servizio">
+              <option>Tagliando completo</option>
+              <option>Diagnosi elettronica</option>
+              <option>Gomme e assetto</option>
+              <option>Revisione</option>
+              <option>Aria condizionata</option>
+              <option>Altro</option>
+            </select>
+            <label for="msg">Messaggio</label>
+            <textarea id="msg" name="msg" placeholder="Marca, modello, anno e descrizione del problema…"></textarea>
+            <button type="submit" class="btn btn-primario">Invia richiesta</button>
+            <div class="esito" id="esito" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="wrap">© 2026 Officina AutoPro · P.IVA 01234567890 · landing demo generata con AppToApp</div>
+  </footer>
+
+<script>
+  // Gestione form (solo lato client, nessun invio a server).
+  const form = document.getElementById('form');
+  const esito = document.getElementById('esito');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const nome = form.nome.value.trim();
+    const tel = form.tel.value.trim();
+    if (!nome || !tel) {
+      esito.textContent = '⚠️ Inserisci almeno nome e telefono.';
+      esito.style.background = 'rgba(245,166,35,.12)';
+      esito.style.borderColor = 'rgba(245,166,35,.4)';
+      esito.style.color = '#ffe0a8';
+      esito.classList.add('mostra');
+      return;
+    }
+    esito.style.background = ''; esito.style.borderColor = ''; esito.style.color = '';
+    esito.textContent = `✅ Grazie ${nome}! Richiesta ricevuta per "${form.servizio.value}". Ti chiamiamo allo ${tel} entro un giorno lavorativo.`;
+    esito.classList.add('mostra');
+    form.reset();
+  });
+</script>
+</body>
+</html>

@@ -69,7 +69,8 @@ Frontend puro, zero build, zero dipendenze installate. Tutto da CDN.
   exporter.js        Impacchettamento .zip (JSZip da CDN)
   templates.js       Registro template
   storage.js         Wrapper IndexedDB (cronologia)
-/templates/          App di esempio standalone (calculator, todo, pomodoro-timer)
+/templates/          App di esempio standalone (calculator, todo, pomodoro-timer,
+                     landing-page, dashboard)
 /assets/icons/       Icone PWA (192, 512, maskable)
 ```
 
